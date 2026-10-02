@@ -599,33 +599,31 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
           "_captcha": "false"
         };
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
-
-        fetch("/contact", {
+        fetch("https://formsubmit.co/ajax/jannatul@upterics.com", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
-            "X-CSRF-TOKEN": csrfToken
+            "Accept": "application/json"
           },
           body: JSON.stringify(formData)
         })
-          .then((response) => response.json().then(data => ({ ok: response.ok, data })))
-          .then(({ ok, data }) => {
-            if (ok && data.success !== false) {
-              if (status) {
-                status.textContent = data.message || "Thank you! Your message has been sent successfully.";
-                status.style.color = "#4cd964";
-              }
-              form.reset();
-            } else {
-              throw new Error(data.message || "Failed to send message. Please try again.");
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
             }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          })
+          .then((data) => {
+            if (status) {
+              status.textContent = "Thank you! Your message has been sent successfully.";
+              status.style.color = "#4cd964";
+            }
+            form.reset();
           })
           .catch((error) => {
             console.error("Form submission error:", error);
             if (status) {
-              status.textContent = error.message || "Failed to send message. Please try again later.";
+              status.textContent = "Failed to send message. Please try again later.";
               status.style.color = "#ff8a8a";
             }
           })
