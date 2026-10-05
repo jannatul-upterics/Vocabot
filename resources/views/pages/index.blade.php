@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Vocabot | AI Voice Agents for Every Business')
-@section('description', 'Vocabot provides AI voice agents that answer calls, book appointments, qualify leads, take orders and automate customer conversations 24/7 across industries.')
+@section('description', 'Vocabot provides AI voice agents that answer calls, book appointments, take orders and automate customer conversations 24/7 across industries.')
 
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/vocabot.css') }}">
