@@ -24,9 +24,7 @@
           </h1>
 
           <p class="hero-lead">
-            Vocabot is an AI voice agent platform that answers calls,
-            books appointments, qualifies leads, takes orders, handles
-            customer questions and automates conversations across industries.
+            Vocabot is an AI voice receptionist for restaurants that answers calls, manages table reservations, checks availability, and assists guests with booking-related questions.
           </p>
 
           <div class="hero-actions">
@@ -103,7 +101,7 @@
           <span><i class="ri-calendar-check-line"></i> Booking</span>
           {{-- <span><i class="ri-user-search-line"></i> Lead Qualification</span> --}}
           <span><i class="ri-customer-service-2-line"></i> Support</span>
-          <span><i class="ri-global-line"></i> Multilingual</span>
+          <!--<span><i class="ri-global-line"></i> Multilingual</span>-->
         </div>
       </div>
     </section>
@@ -138,8 +136,8 @@
 
           <article class="problem-card glass-card reveal">
             <div class="icon-box"><i class="ri-user-forbid-line"></i></div>
-            <h3>Slow Lead Response</h3>
-            <p>Qualify and route inbound opportunities while customer intent is still high.</p>
+            <h3>Long Wait Times</h3>
+            <p>Guests don't want to wait for someone to answer the phone.</p>
           </article>
         </div>
       </div>
@@ -151,7 +149,7 @@
         <div class="section-heading center reveal">
           <span class="section-label">THE VOCABOT PLATFORM</span>
           <h2>One AI voice agent.<br><span class="gradient-text">Endless workflows.</span></h2>
-          <p>From the first hello to the final action, Vocabot turns natural conversations into completed business tasks.</p>
+          <p style="max-width: 100%; white-space: nowrap;">From the first hello to the final action, Vocabot turns natural conversations into completed business tasks.</p>
         </div>
 
         <div class="feature-grid">
@@ -164,8 +162,8 @@
 
           <article class="feature-card glass-card reveal">
             <div class="feature-icon"><i class="ri-calendar-check-fill"></i></div>
-            <h3>Appointments & Reservations</h3>
-            <p>Book, reschedule and cancel appointments or reservations using your configured rules.</p>
+            <h3>Reservations</h3>
+            <p>Book, reschedule and cancel reservations using your configured rules.</p>
             <a href="{{ url('/product') }}" class="feature-link">Automated booking <i class="ri-arrow-right-line"></i></a>
           </article>
 
@@ -185,19 +183,19 @@
             <a href="{{ url('/product') }}" class="feature-link">Smart handoff <i class="ri-arrow-right-line"></i></a>
           </article>
 
-          <article class="feature-card glass-card reveal">
+          <!--<article class="feature-card glass-card reveal">
             <div class="feature-icon"><i class="ri-shopping-bag-3-fill"></i></div>
             <h3>Orders & Transactions</h3>
             <p>Capture orders, requests and structured information through natural voice conversations.</p>
             <a href="{{ url('/product') }}" class="feature-link">Conversation to action <i class="ri-arrow-right-line"></i></a>
-          </article>
+          </article>-->
 
-          <article class="feature-card glass-card reveal">
+          <!--<article class="feature-card glass-card reveal">
             <div class="feature-icon"><i class="ri-global-fill"></i></div>
             <h3>Multilingual Conversations</h3>
             <p>Serve customers across languages and markets with natural, configurable AI conversations.</p>
             <a href="{{ url('/product') }}" class="feature-link">Global-ready <i class="ri-arrow-right-line"></i></a>
-          </article>
+          </article>-->
         </div>
       </div>
     </section>
@@ -216,8 +214,8 @@
             <div class="step-number">01</div>
             <div class="step-line"></div>
             <div class="step-icon"><i class="ri-phone-fill"></i></div>
-            <h3>Customer Calls</h3>
-            <p>A customer contacts your business through your configured phone channel.</p>
+            <h3>Inbound Call</h3>
+            <p>A customer calls your business to make a reservation, book an appointment, or ask a question.</p>
           </div>
 
           <div class="step reveal">
@@ -225,22 +223,22 @@
             <div class="step-line"></div>
             <div class="step-icon"><i class="ri-sparkling-2-fill"></i></div>
             <h3>AI Understands</h3>
-            <p>Vocabot understands intent, context and the information required to help.</p>
+            <p>Vocabot AI listens, processes caller intent, and responds with natural voice conversation in real time.</p>
           </div>
 
           <div class="step reveal">
             <div class="step-number">03</div>
             <div class="step-line"></div>
             <div class="step-icon"><i class="ri-flow-chart"></i></div>
-            <h3>Workflow Runs</h3>
-            <p>The agent connects the conversation to your business rules and systems.</p>
+            <h3>Workflow Automation</h3>
+            <p>It verifies availability, qualifies requests, captures details, and triggers business workflow actions.</p>
           </div>
 
           <div class="step reveal">
             <div class="step-number">04</div>
             <div class="step-icon"><i class="ri-checkbox-circle-fill"></i></div>
-            <h3>Action Completed</h3>
-            <p>Book, qualify, order, answer, update or transfer—without unnecessary manual work.</p>
+            <h3>Task Confirmed</h3>
+            <p>The AI completes the task, confirms with the customer, and syncs updates to your system without manual work.</p>
           </div>
         </div>
       </div>
@@ -277,6 +275,7 @@
 
           <audio id="demoAudio" controls preload="metadata">
             <source src="{{ asset('demo.mp3') }}" type="audio/mpeg">
+            <source src="{{ asset('demo.wav') }}" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
 
@@ -312,22 +311,22 @@
             <article class="showcase-slide active">
               <span class="slide-tag">01 • ALWAYS ON</span>
               <h2>Never miss the first hello.</h2>
-              <p>Your AI agent is ready to answer calls, capture information and start helping customers instantly.</p>
+              <p>Your AI agent is ready to answer calls 24/7, capture key information, and start assisting customers instantly.</p>
             </article>
             <article class="showcase-slide">
               <span class="slide-tag">02 • SMART UNDERSTANDING</span>
               <h2>Understands what customers mean.</h2>
-              <p>Natural conversation helps the agent understand intent instead of relying only on rigid scripts.</p>
+              <p>Natural conversation intelligence helps the agent understand caller intent without rigid scripts or phone menus.</p>
             </article>
             <article class="showcase-slide">
-              <span class="slide-tag">03 • AUTOMATION</span>
+              <span class="slide-tag">03 • WORKFLOW AUTOMATION</span>
               <h2>Turn words into workflows.</h2>
-              <p>Connect conversations to booking, qualification, order-taking, support and other business actions.</p>
+              <p>Connect voice conversations directly to reservations, appointment bookings, lead qualification, and order processing.</p>
             </article>
             <article class="showcase-slide">
               <span class="slide-tag">04 • BUSINESS INTELLIGENCE</span>
               <h2>Make every conversation measurable.</h2>
-              <p>Use conversation history and performance insights to understand demand and improve operations.</p>
+              <p>Use conversation history, call transcripts, and performance insights to understand demand and improve operations.</p>
             </article>
           </div>
         </div>
@@ -364,17 +363,17 @@
         <div class="dashboard-copy reveal">
           <span class="section-label">CONTROL CENTER</span>
           <h2>See what your AI agent is doing <span class="gradient-text">in real time.</span></h2>
-          <p>Monitor conversations, workflows and performance from one central dashboard.</p>
+          <p>Monitor guest conversations, reservations, and AI performance from one central dashboard.</p>
 
           <div class="check-list">
-            <div><i class="ri-checkbox-circle-fill"></i> Live conversation monitoring</div>
-            <div><i class="ri-checkbox-circle-fill"></i> Appointment and reservation management</div>
+            <div><i class="ri-checkbox-circle-fill"></i> Live call monitoring</div>
+            <div><i class="ri-checkbox-circle-fill"></i> Reservation management</div>
             <div><i class="ri-checkbox-circle-fill"></i> Conversation history</div>
-            <div><i class="ri-checkbox-circle-fill"></i> Performance analytics</div>
+            <div><i class="ri-checkbox-circle-fill"></i> Call & booking analytics</div>
             <div><i class="ri-checkbox-circle-fill"></i> Human handoff visibility</div>
           </div>
 
-          <a class="btn btn-primary" href="#contact">See Vocabot in Action <i class="ri-arrow-right-line"></i></a>
+          <a class="btn btn-primary" href="#contact" style="margin-top: 28px;">See Vocabot in Action <i class="ri-arrow-right-line"></i></a>
         </div>
 
         <div class="dashboard-window glass-card reveal" id="dashboardCard">
@@ -388,16 +387,16 @@
 
           <div class="metric-grid">
             <div class="metric"><span>Active Calls</span><strong>12</strong><small><i class="ri-arrow-up-line"></i> Live now</small></div>
-            <div class="metric"><span>Bookings</span><strong>38</strong><small><i class="ri-calendar-check-line"></i> Today</small></div>
-            <div class="metric"><span>Qualified Leads</span><strong>24</strong><small><i class="ri-user-follow-line"></i> Captured</small></div>
-            <div class="metric"><span>Tasks Completed</span><strong>96%</strong><small><i class="ri-checkbox-circle-line"></i> Automated</small></div>
+            <div class="metric"><span>Reservations</span><strong>38</strong><small><i class="ri-calendar-check-line"></i> Today</small></div>
+            <div class="metric"><span>Calls Handled</span><strong>24</strong><small><i class="ri-user-follow-line"></i> Today</small></div>
+            <div class="metric"><span>Bookings Completed</span><strong>96%</strong><small><i class="ri-checkbox-circle-line"></i> Automated</small></div>
           </div>
 
           <div class="activity">
             <div class="activity-title"><strong>Live Activity</strong><span>Updated now</span></div>
-            <div class="activity-row"><span class="activity-icon"><i class="ri-calendar-check-fill"></i></span><div><strong>Appointment booked</strong><span>Customer requested 3:00 PM</span></div><time>now</time></div>
-            <div class="activity-row"><span class="activity-icon"><i class="ri-user-add-fill"></i></span><div><strong>Lead qualified</strong><span>High-intent customer captured</span></div><time>2m</time></div>
-            <div class="activity-row"><span class="activity-icon"><i class="ri-phone-fill"></i></span><div><strong>Call transferred</strong><span>Complex request routed to staff</span></div><time>5m</time></div>
+            <div class="activity-row"><span class="activity-icon"><i class="ri-calendar-check-fill"></i></span><div><strong>Reservation Confirmed</strong><span>Customer requested 3:00 PM</span></div><time>now</time></div>
+            <div class="activity-row"><span class="activity-icon"><i class="ri-user-add-fill"></i></span><div><strong>Guest Query Resolved</strong><span>Customer asked about table availability</span></div><time>2m</time></div>
+            <div class="activity-row"><span class="activity-icon"><i class="ri-phone-fill"></i></span><div><strong>Call Transfered</strong><span>Complex request routed to staff</span></div><time>5m</time></div>
           </div>
         </div>
       </div>
@@ -521,7 +520,7 @@
           </div>
           <div class="form-row">
             <label>Company<input type="text" name="company" placeholder="Company name"></label>
-            <label>Industry<select name="industry">
+            <!--<label>Industry<select name="industry">
               <option value="">Select industry</option>
               <option>Healthcare</option>
               <option>Restaurants</option>
@@ -534,13 +533,13 @@
               <option>Logistics</option>
               <option>Professional Services</option>
               <option>Other</option>
-            </select></label>
+            </select></label>-->
           </div>
           <label>What would you like to automate?
             <textarea name="message" rows="4" placeholder="Tell us about your calls, bookings, leads or support workflow..."></textarea>
           </label>
           <button class="btn btn-primary btn-lg" type="submit">Request a Demo <i class="ri-arrow-right-line"></i></button>
-          <p class="form-note" id="formNote">This demo form is front-end only. Connect it to your backend/form service before launch.</p>
+          <!--<p class="form-note" id="formNote">This demo form is front-end only. Connect it to your backend/form service before launch.</p>-->
         </form>
       </div>
     </section>

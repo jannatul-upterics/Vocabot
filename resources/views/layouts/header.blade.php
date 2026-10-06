@@ -11,9 +11,9 @@
       <a href="{{ url('/product') }}" class="{{ Request::is('product') ? 'active' : '' }}">Product</a>
       <a href="{{ url('/how-it-works') }}" class="{{ Request::is('how-it-works') ? 'active' : '' }}">How It Works</a>
       <a href="{{ url('/solutions') }}" class="{{ Request::is('solutions') ? 'active' : '' }}">Solutions</a>
-      <a href="{{ url('/integrations') }}" class="{{ Request::is('integrations') ? 'active' : '' }}">Integrations</a>
+      <!--<a href="{{ url('/integrations') }}" class="{{ Request::is('integrations') ? 'active' : '' }}">Integrations</a>-->
       <a href="{{ url('/contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">Contact</a>
-      <a href="{{ url('/policy') }}" class="{{ Request::is('policy') || Request::is('policies') ? 'active' : '' }}">Policies</a>
+      <!--<a href="{{ url('/policy') }}" class="{{ Request::is('policy') || Request::is('policies') ? 'active' : '' }}">Policies</a>-->
     </nav>
 
     <a class="btn btn-primary nav-btn" href="{{ Request::is('/') ? '#contact' : url('/contact') }}">Book a Demo</a>

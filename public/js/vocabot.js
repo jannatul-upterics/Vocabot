@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqAccordion();
   initRoiCalculator();
   initScrollReveal();
+  initAudioPlayer();
 });
 
 /* =========================================================
@@ -128,22 +129,25 @@ function initShowcaseSlider() {
      Slider Images
      ----------------------------------------- */
 
+  const initialSrc = showcaseImage.getAttribute("src") || "";
+  const pathPrefix = initialSrc.includes("images/") ? "images/" : "";
+
   const slides = [
     {
-      image: "s1.png",
-      alt: "Vocabot AI answering a customer call"
+      image: pathPrefix + "s1.png",
+      alt: "Vocabot AI 24/7 automated call receptionist - Always On"
     },
     {
-      image: "s2.png",
-      alt: "Vocabot understanding customer intent"
+      image: pathPrefix + "s2.png",
+      alt: "Vocabot AI understanding caller intent - Smart NLU"
     },
     {
-      image: "s3.png",
-      alt: "Vocabot workflow automation"
+      image: pathPrefix + "s3.png",
+      alt: "Vocabot automated workflow execution and booking confirmation"
     },
     {
-      image: "s4.png",
-      alt: "Vocabot conversation analytics"
+      image: pathPrefix + "s4.png",
+      alt: "Vocabot conversation history and business analytics"
     }
   ];
 
@@ -183,24 +187,32 @@ function initShowcaseSlider() {
 
   function updateSlider(index) {
     currentIndex = index;
+    const target = slides[currentIndex];
+    if (!target) return;
 
-    /* Fade image out */
-    showcaseImage.style.opacity = "0";
+    showcaseImage.alt = target.alt;
 
-    setTimeout(() => {
-      showcaseImage.src = slides[currentIndex].image;
-      showcaseImage.alt = slides[currentIndex].alt;
+    const setVisible = () => {
+      showcaseImage.style.opacity = "1";
+    };
 
-      /* Make image visible after loading */
-      showcaseImage.onload = () => {
-        showcaseImage.style.opacity = "1";
-      };
+    showcaseImage.onload = setVisible;
+    showcaseImage.onerror = setVisible;
 
-      /* Fallback if browser already cached image */
-      if (showcaseImage.complete) {
-        showcaseImage.style.opacity = "1";
-      }
-    }, 180);
+    const currentImageSrc = showcaseImage.getAttribute("src") || "";
+    const isDifferent = !currentImageSrc.endsWith(target.image);
+
+    if (isDifferent) {
+      showcaseImage.style.opacity = "0";
+      setTimeout(() => {
+        showcaseImage.src = target.image;
+        if (showcaseImage.complete) {
+          setVisible();
+        }
+      }, 150);
+    } else {
+      setVisible();
+    }
 
     /* -----------------------------------------
        Update Text Content
@@ -400,4 +412,26 @@ function initScrollReveal() {
   }, observerOptions);
 
   revealElements.forEach((el) => revealObserver.observe(el));
+}
+
+/* =========================================================
+   7. AUDIO PLAYER & VISUALIZER
+   ========================================================= */
+function initAudioPlayer() {
+  const audio = document.getElementById("demoAudio");
+  const visualizer = document.getElementById("audioVisualizer");
+
+  if (!audio) return;
+
+  audio.addEventListener("play", () => {
+    visualizer?.classList.add("playing");
+  });
+
+  audio.addEventListener("pause", () => {
+    visualizer?.classList.remove("playing");
+  });
+
+  audio.addEventListener("ended", () => {
+    visualizer?.classList.remove("playing");
+  });
 }
