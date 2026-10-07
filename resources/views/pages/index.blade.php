@@ -333,7 +333,7 @@
       </div>
     </section>
 
-    <!-- ================= SECTORS ================= -->
+    <!-- ================= SECTORS ================= 
     <section class="section sectors-section" id="sectors">
       <div class="container">
         <div class="section-heading center reveal">
@@ -355,7 +355,7 @@
           <article class="sector-card glass-card reveal"><i class="ri-customer-service-2-line"></i><h3>Professional Services</h3><p>Lead intake, qualification and appointment booking.</p></article>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <!-- ================= DASHBOARD ================= -->
     <section class="section dashboard-section">

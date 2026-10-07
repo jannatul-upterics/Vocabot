@@ -90,7 +90,7 @@
                 <div class="vocabot-core">
                     <div class="core-ring"></div>
                     <div class="core-inner">
-                        <img src="{{ asset('images/logo2.png') }}" alt="Vocabot">
+                        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot">
                     </div>
                     <strong>Vocabot</strong>
                     <small>AI Voice Agent</small>

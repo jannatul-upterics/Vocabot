@@ -342,10 +342,9 @@ p{
   width:44px;
   height:44px;
 
-  border-radius:12px;
-  object-fit:cover;
-
-  border:1px solid rgba(255,255,255,.12);
+  object-fit:contain;
+  background:transparent;
+  border:none;
 }
 
 .brand b{
@@ -2294,7 +2293,7 @@ p{
 .footer-grid{
   display:grid;
 
-  grid-template-columns:2fr 1fr 1fr 1fr;
+  grid-template-columns:2fr 1fr 1fr;
 
   gap:45px;
 }
@@ -2629,6 +2628,11 @@ p{
 
   .footer-grid{
     grid-template-columns:1fr 1fr;
+    gap:35px 20px;
+  }
+
+  .footer-brand{
+    grid-column:1 / -1;
   }
 
   .footer-bottom{
@@ -2715,6 +2719,11 @@ p{
 
   .footer-grid{
     grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .footer-brand{
+    grid-column:auto;
   }
 
   .footer-bottom{

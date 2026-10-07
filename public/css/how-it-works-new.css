@@ -196,9 +196,9 @@ button {
   height: 44px;
   flex: 0 0 44px;
   display: block;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  object-fit: contain;
+  background: transparent;
+  border: none;
 }
 
 .brand b {
@@ -1349,7 +1349,7 @@ button {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 45px;
 }
 
@@ -1545,12 +1545,24 @@ button {
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 20px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
   }
 }
 
 /* MOBILE (MAX-WIDTH: 650PX) */
 @media (max-width: 650px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
   .navbar {
     min-height: 70px;
   }

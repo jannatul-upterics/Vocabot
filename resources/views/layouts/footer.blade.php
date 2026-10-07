@@ -3,7 +3,7 @@
   <div class="container footer-grid">
     <div class="footer-brand">
       <a class="brand logo" href="{{ url('/') }}">
-        <img src="{{ asset('images/logo2.png') }}" alt="Vocabot logo">
+        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot logo">
         <span><b>Voca</b>bot</span>
       </a>
       <p>AI voice agents that turn conversations into completed business workflows.</p>

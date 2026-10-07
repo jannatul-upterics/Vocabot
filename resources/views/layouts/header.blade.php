@@ -2,7 +2,7 @@
 <header class="navbar" id="navbar">
   <div class="container nav-inner">
     <a class="brand logo" href="{{ url('/') }}" aria-label="Vocabot home">
-      <img src="{{ asset('images/logo2.png') }}" alt="Vocabot logo">
+      <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot logo">
       <span><b>Voca</b>bot</span>
     </a>
 

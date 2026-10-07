@@ -9,7 +9,7 @@
   <meta name="description" content="@yield('description', 'Vocabot provides AI voice agents that answer calls, book appointments, qualify leads, take orders and automate customer conversations 24/7 across industries.')">
   <meta name="theme-color" content="#070313">
 
-  <link rel="icon" href="{{ asset('images/logo2.png') }}">
+  <link rel="icon" href="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lato:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
