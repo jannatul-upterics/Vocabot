@@ -70,7 +70,7 @@
         </div>
 
         <div class="footer">
-            Delivered to <span class="footer-highlight">Jemma.a@vocabots.com</span> via Vocabot AI Voice Platform.
+            Delivered to <span class="footer-highlight">jemma.a@vocabots.com</span> via Vocabot AI Voice Platform.
         </div>
     </div>
 </body>

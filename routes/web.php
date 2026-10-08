@@ -53,7 +53,7 @@ Route::post('/contact', function (Request $request) {
     }
 
     try {
-        Illuminate\Support\Facades\Mail::to('Jemma.a@vocabots.com')
+        Illuminate\Support\Facades\Mail::to('jemma.a@vocabots.com')
             ->send(new App\Mail\ContactFormMail($data));
 
         return response()->json([

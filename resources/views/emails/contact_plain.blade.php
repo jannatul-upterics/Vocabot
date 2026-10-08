@@ -21,5 +21,5 @@ MESSAGE:
 
 ====================================================
 Sent via Vocabot Website
-Delivered to: Jemma.a@vocabots.com
+Delivered to: jemma.a@vocabots.com
 ====================================================
