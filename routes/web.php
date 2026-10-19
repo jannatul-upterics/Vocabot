@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,37 +36,10 @@ Route::get('/integrations', function () {
     return view('pages.integrations');
 });
 
-Route::get('/contact', function () {
-    return view('pages.contact');
-});
+use App\Http\Controllers\ContactController;
 
-Route::post('/contact', function (Request $request) {
-    $data = $request->all();
-
-    $email = trim($data['email'] ?? $data['Work Email'] ?? $data['work_email'] ?? $data['Email'] ?? '');
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Please enter a valid work email address.'
-        ], 422);
-    }
-
-    try {
-        Illuminate\Support\Facades\Mail::to('jemma.a@vocabots.com')
-            ->send(new App\Mail\ContactFormMail($data));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Thank you! Your message has been sent successfully.'
-        ]);
-    } catch (\Throwable $e) {
-        Illuminate\Support\Facades\Log::error('SMTP Mail Sending Failure: ' . $e->getMessage());
-        return response()->json([
-            'success' => false,
-            'message' => 'Failed to send message: ' . $e->getMessage()
-        ], 500);
-    }
-});
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::get('/policy', function () {
     return view('pages.policy');

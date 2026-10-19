@@ -571,20 +571,22 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
 
 
         /* -----------------------------------------------------
-           SUBMIT FORM DATA TO EMAIL
+           SUBMIT FORM DATA TO BACKEND
            ----------------------------------------------------- */
 
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message <span>→</span>';
+        const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Send Message <span>→</span>';
 
         if (status) {
-          status.textContent = "Sending your message...";
+          status.textContent = "Saving your message...";
           status.style.color = "#b990ff";
         }
 
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.style.opacity = "0.7";
+          submitBtn.style.cursor = "not-allowed";
+          submitBtn.innerHTML = '<i class="ri-loader-4-line ri-spin" style="margin-right: 8px;"></i> Processing...';
         }
 
         const formData = {
@@ -594,12 +596,12 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
           "Work Email": email,
           "Company": company || "Not provided",
           "Interested In": interest,
-          "Message": message || "Not provided",
-          "_subject": `Vocabot Contact Form Submission - ${interest}`,
-          "_captcha": "false"
+          "Message": message || "Not provided"
         };
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content 
+          || form.querySelector('input[name="_token"]')?.value 
+          || '';
 
         fetch("/contact", {
           method: "POST",
@@ -610,30 +612,45 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
           },
           body: JSON.stringify(formData)
         })
-          .then((response) => response.json().then(data => ({ ok: response.ok, data })))
-          .then(({ ok, data }) => {
+          .then((response) => response.json().then(data => ({ ok: response.ok, status: response.status, data })))
+          .then(({ ok, status: statusCode, data }) => {
             if (ok && data.success !== false) {
               if (status) {
-                status.textContent = data.message || "Thank you! Your message has been sent successfully.";
+                status.textContent = data.message || "Thank you! Your message has been received successfully.";
                 status.style.color = "#4cd964";
               }
+              // Clear form only on verified success
               form.reset();
             } else {
-              throw new Error(data.message || "Failed to send message. Please try again.");
+              let errMsg = data.message;
+              if (data.errors && typeof data.errors === 'object') {
+                const firstErrorKey = Object.keys(data.errors)[0];
+                if (firstErrorKey && data.errors[firstErrorKey][0]) {
+                  errMsg = data.errors[firstErrorKey][0];
+                }
+              }
+
+              if (statusCode === 500) {
+                errMsg = errMsg || "A database or server error occurred while processing your request. Please try again shortly.";
+              }
+
+              throw new Error(errMsg || "Failed to submit form. Please check your inputs and try again.");
             }
           })
           .catch((error) => {
             console.error("Form submission error:", error);
             if (status) {
-              status.textContent = error.message || "Failed to send message. Please try again later.";
+              status.textContent = error.message || "An unexpected error occurred. Please try again later.";
               status.style.color = "#ff8a8a";
             }
+            // Form values are preserved when submission fails
           })
           .finally(() => {
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.style.opacity = "1";
-              submitBtn.innerHTML = originalBtnText;
+              submitBtn.style.cursor = "pointer";
+              submitBtn.innerHTML = originalBtnHtml;
             }
           });
 

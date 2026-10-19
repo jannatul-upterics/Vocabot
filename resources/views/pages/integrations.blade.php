@@ -28,9 +28,7 @@
                 </h1>
 
                 <p class="hero-lead">
-                    Bring your AI voice agent into the tools you already use.
-                    Connect calls, leads, appointments, customers and conversations
-                    across your entire business workflow.
+                    Connect your AI voice agent with the tools you already use. Seamlessly manage restaurant calls, guest conversations, table availability, and reservations from one connected workflow.
                 </p>
 
                 <div class="hero-buttons">
@@ -427,7 +425,7 @@
                 <div class="workflow-number">01</div>
                 <div class="workflow-icon">☎</div>
                 <h3>Customer Calls</h3>
-                <p>A customer calls your business and Vocabot answers instantly.</p>
+                <p>A guest calls your restaurant to book a table or ask a question.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -436,7 +434,7 @@
                 <div class="workflow-number">02</div>
                 <div class="workflow-icon">✦</div>
                 <h3>Vocabot Understands</h3>
-                <p>The AI understands the customer's request and responds naturally.</p>
+                <p>The AI understands the guest’s request and collects the details needed for the reservation.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -444,8 +442,8 @@
             <div class="workflow-card">
                 <div class="workflow-number">03</div>
                 <div class="workflow-icon">◈</div>
-                <h3>Data Syncs</h3>
-                <p>Relevant information is sent to your connected business tools.</p>
+                <h3>Availability Checked</h3>
+                <p>The AI checks table availability based on the requested date, time, and party size.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -453,8 +451,8 @@
             <div class="workflow-card">
                 <div class="workflow-number">04</div>
                 <div class="workflow-icon">✓</div>
-                <h3>Action Happens</h3>
-                <p>An appointment, lead, notification or workflow is completed automatically.</p>
+                <h3>Reservation Confirmed</h3>
+                <p>The table is booked and the guest receives an instant confirmation.</p>
             </div>
         </div>
 

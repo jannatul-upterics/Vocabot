@@ -89,7 +89,7 @@
           </h2>
         </div>
         <p>
-          From lead qualification to customer support, Vocabot handles conversations that keep your business moving.
+        From handling guest enquiries to confirming reservations, Vocabot manages conversations that keep your restaurant running smoothly.
         </p>
       </div>
 
@@ -98,8 +98,8 @@
         <article class="solution-card">
           <div class="card-number">01</div>
           <div class="solution-icon"><span>◉</span></div>
-          <h3>Sales & Lead Qualification</h3>
-          <p>Automatically engage new leads, ask qualifying questions and identify high-intent prospects.</p>
+          <h3>Guest Call Handling</h3>
+          <p>Handles incoming restaurant calls and understands what the guest needs.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
 
@@ -107,8 +107,8 @@
         <article class="solution-card featured">
           <div class="card-number">02</div>
           <div class="solution-icon"><span>◌</span></div>
-          <h3>Customer Support</h3>
-          <p>Give customers instant voice assistance for common questions, requests and support workflows.</p>
+          <h3>Guest Queries</h3>
+          <p>Provides instant answers to configured restaurant FAQs.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
 
@@ -116,8 +116,8 @@
         <article class="solution-card">
           <div class="card-number">03</div>
           <div class="solution-icon"><span>⌁</span></div>
-          <h3>Appointment Scheduling</h3>
-          <p>Let AI handle appointment calls, confirmations, rescheduling and reminders automatically.</p>
+          <h3>Table Reservations</h3>
+          <p>Collects booking details, checks availability, and confirms reservations.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
 
@@ -125,8 +125,8 @@
         <article class="solution-card">
           <div class="card-number">04</div>
           <div class="solution-icon"><span>◈</span></div>
-          <h3>Follow-ups & Outreach</h3>
-          <p>Keep conversations moving with automated follow-ups that sound natural and personalized.</p>
+          <h3>Reservation Management</h3>
+          <p>Handles reservation-related requests such as changes or cancellations, if supported.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
 
@@ -134,8 +134,8 @@
         <article class="solution-card">
           <div class="card-number">05</div>
           <div class="solution-icon"><span>+</span></div>
-          <h3>Operations</h3>
-          <p>Automate repetitive voice workflows and reduce the manual effort required from your team.</p>
+          <h3>Guest Information Capture</h3>
+          <p>Collects names, party size, preferred time, and other required booking information.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
 
@@ -143,8 +143,8 @@
         <article class="solution-card">
           <div class="card-number">06</div>
           <div class="solution-icon"><span>∞</span></div>
-          <h3>Custom Voice Workflows</h3>
-          <p>Build AI-powered conversations around your unique business process and customer journey.</p>
+          <h3>Restaurant Voice Workflows</h3>
+          <p>Handles natural conversations and follows your restaurant's configured booking workflow.</p>
           <a href="{{ url('/contact') }}">Explore solution <span>↗</span></a>
         </article>
       </div>

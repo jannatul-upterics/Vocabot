@@ -67,10 +67,15 @@
                 <div class="field-value">{!! nl2br(e($messageText)) !!}</div>
             </div>
             @endif
+
+            <div class="field-group">
+                <span class="field-label">Submission Date & Time</span>
+                <div class="field-value">{{ $submittedAt }}</div>
+            </div>
         </div>
 
         <div class="footer">
-            Delivered to <span class="footer-highlight">jemma.a@vocabots.com</span> via Vocabot AI Voice Platform.
+            Delivered to <span class="footer-highlight">{{ config('mail.contact_recipient.address') }}</span> via Vocabot AI Voice Platform.
         </div>
     </div>
 </body>

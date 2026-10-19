@@ -69,15 +69,15 @@
             <div class="marquee">
                 <span>ANSWER CALLS</span>
                 <b>✦</b>
-                <span>BOOK APPOINTMENTS</span>
+                <span>UNDERSTAND REQUESTS</span>
                 <b>✦</b>
-                <span>QUALIFY LEADS</span>
+                <span>CHECK AVAILABILITY</span>
                 <b>✦</b>
-                <span>HANDLE SUPPORT</span>
+                <span>MANAGE BOOKINGS</span>
                 <b>✦</b>
-                <span>CAPTURE ORDERS</span>
+                <span>ANSWER QUESTIONS</span>
                 <b>✦</b>
-                <span>ANSWER CALLS</span>
+                <span>HANDLE CANCELLATIONS</span>
                 <b>✦</b>
             </div>
         </section>
@@ -148,7 +148,7 @@
                                 <div class="activity-row">
                                     <i class="dot"></i>
                                     <div>
-                                        <b>Appointment intent detected</b>
+                                        <b>Reservation Intent Detected</b>
                                         <small>Customer call · 12 sec ago</small>
                                     </div>
                                     <strong>Running</strong>
@@ -156,7 +156,7 @@
                                 <div class="activity-row">
                                     <i class="dot"></i>
                                     <div>
-                                        <b>Lead qualified</b>
+                                        <b>Calls Handled</b>
                                         <small>Customer call · 31 sec ago</small>
                                     </div>
                                     <strong>Completed</strong>
@@ -180,7 +180,7 @@
                                     <strong>92%</strong>
                                     <small>confidence</small>
                                 </div>
-                                <h4>Appointment booking</h4>
+                                <h4>Table Reservation</h4>
                                 <p>
                                     AI is checking configured availability
                                     and preparing the next action.
@@ -196,7 +196,7 @@
         <section id="solutions" class="section dark">
             <div class="wrap">
                 <div class="center-head reveal">
-                    <div class="eyebrow">ONE AGENT · SIX JOBS</div>
+                    <div class="eyebrow">ONE AGENT · MANY JOBS</div>
                     <h2>Voice that does <span>more than talk.</span></h2>
                 </div>
 
@@ -213,19 +213,19 @@
                         <h3>Appointments & Reservations</h3>
                         <p>Book, reschedule and cancel using your configured rules.</p>
                     </article>
-                    <article>
+                    <!--<article>
                         <b>03</b>
                         <div class="job-icon">⌁</div>
                         <h3>Lead Qualification</h3>
                         <p>Ask the right questions and route qualified opportunities.</p>
-                    </article>
+                    </article>-->
                     <article>
-                        <b>04</b>
+                        <b>03</b>
                         <div class="job-icon">◌</div>
                         <h3>Customer Support</h3>
                         <p>Answer common questions and escalate when needed.</p>
                     </article>
-                    <article>
+                    <!--<article>
                         <b>05</b>
                         <div class="job-icon">▣</div>
                         <h3>Orders & Transactions</h3>
@@ -236,7 +236,7 @@
                         <div class="job-icon">文</div>
                         <h3>Multilingual Conversations</h3>
                         <p>Serve customers across languages and markets.</p>
-                    </article>
+                    </article>-->
                 </div>
             </div>
         </section>
@@ -283,7 +283,7 @@
                     </div>
 
                     <div class="analysis">
-                        <div><small>INTENT</small><b>Appointment</b></div>
+                        <div><small>INTENT</small><b>Reservation</b></div>
                         <div><small>ACTION</small><b>Check availability</b></div>
                         <div><small>STATUS</small><b class="live-text">Processing…</b></div>
                     </div>
@@ -337,7 +337,7 @@
         </section>
 
         <!-- ================= INDUSTRIES ================= -->
-        <section id="integrations" class="section industries">
+        <!--<section id="integrations" class="section industries">
             <div class="wrap">
                 <div class="center-head reveal">
                     <div class="eyebrow">BUILT FOR BUSINESS</div>
@@ -357,7 +357,7 @@
                     <span>Professional Services</span>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <!-- ================= BUSINESS VALUE ================= -->
         <section class="section value">

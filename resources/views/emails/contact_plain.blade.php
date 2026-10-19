@@ -19,7 +19,9 @@ MESSAGE:
 ----------------------------------------------------
 {{ $messageText ?? 'No message provided.' }}
 
+Submission Date & Time: {{ $submittedAt }}
+
 ====================================================
 Sent via Vocabot Website
-Delivered to: jemma.a@vocabots.com
+Delivered to: {{ config('mail.contact_recipient.address') }}
 ====================================================

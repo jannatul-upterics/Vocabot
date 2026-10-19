@@ -98,25 +98,25 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="Your first name" autocomplete="given-name" required>
+                            <input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}" placeholder="Your first name" autocomplete="given-name" required>
                         </div>
 
                         <div class="form-group">
                             <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Your last name" autocomplete="family-name" required>
+                            <input type="text" id="lastName" name="lastName" value="{{ old('lastName') }}" placeholder="Your last name" autocomplete="family-name" required>
                         </div>
                     </div>
 
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email">Work Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="you@company.com" autocomplete="email" required>
                     </div>
 
                     <!-- Company -->
                     <div class="form-group">
                         <label for="company">Company</label>
-                        <input type="text" id="company" name="company" placeholder="Your company name" autocomplete="organization">
+                        <input type="text" id="company" name="company" value="{{ old('company') }}" placeholder="Your company name" autocomplete="organization">
                     </div>
 
                     <!-- Interest -->
@@ -124,19 +124,19 @@
                         <label for="interest">What can we help with?</label>
                         <select id="interest" name="interest" required>
                             <option value="">Select an option</option>
-                            <option value="Book a Demo">Book a Demo</option>
-                            <option value="Voice AI Agent">Voice AI Agent</option>
-                            <option value="Customer Support">Customer Support</option>
-                            <option value="Sales Automation">Sales Automation</option>
-                            <option value="Integrations">Integrations</option>
-                            <option value="Other">Other</option>
+                            <option value="Book a Demo" {{ old('interest') == 'Book a Demo' ? 'selected' : '' }}>Book a Demo</option>
+                            <option value="Voice AI Agent" {{ old('interest') == 'Voice AI Agent' ? 'selected' : '' }}>Voice AI Agent</option>
+                            <option value="Customer Support" {{ old('interest') == 'Customer Support' ? 'selected' : '' }}>Customer Support</option>
+                            <option value="Sales Automation" {{ old('interest') == 'Sales Automation' ? 'selected' : '' }}>Sales Automation</option>
+                            <option value="Integrations" {{ old('interest') == 'Integrations' ? 'selected' : '' }}>Integrations</option>
+                            <option value="Other" {{ old('interest') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
                     </div>
 
                     <!-- Message -->
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements..."></textarea>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements...">{{ old('message') }}</textarea>
                     </div>
 
                     <!-- Submit -->

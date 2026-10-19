@@ -96,7 +96,7 @@
           </div>
           <div class="step-mini">
             <span>Customer</span>
-            <strong>“I need to change my appointment.”</strong>
+            <strong>“I need to change my reservation.”</strong>
           </div>
         </article>
 
@@ -130,7 +130,7 @@
           </div>
           <div class="step-mini">
             <span>Workflow</span>
-            <strong>Appointment → Update → Confirm</strong>
+            <strong>Reservation → Update → Confirm</strong>
           </div>
         </article>
 
@@ -209,7 +209,7 @@
         <div class="call-action">
           <div>
             <small>ACTION TRIGGERED</small>
-            <strong>Appointment workflow</strong>
+            <strong>Reservation workflow</strong>
           </div>
           <span class="check">✓</span>
         </div>

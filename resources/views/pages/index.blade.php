@@ -275,7 +275,6 @@
 
           <audio id="demoAudio" controls preload="metadata">
             <source src="{{ asset('demo.mp3') }}" type="audio/mpeg">
-            <source src="{{ asset('demo.wav') }}" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
 

@@ -41,9 +41,10 @@ return [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME', 'smtp'),
             'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'port' => env('MAIL_PORT', 587),
-            'username' => env('MAIL_USERNAME', 'jannatul@upterics.com'),
+            'host' => env('MAIL_HOST', '127.0.0.1'),
+            'port' => env('MAIL_PORT', 2525),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
@@ -111,8 +112,23 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'jannatul@upterics.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Vocabot')),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Form Recipient
+    |--------------------------------------------------------------------------
+    |
+    | The email address that receives notifications when a contact form is
+    | submitted on the Vocabot website.
+    |
+    */
+
+    'contact_recipient' => [
+        'address' => env('CONTACT_RECIPIENT_EMAIL', env('MAIL_TO_ADDRESS', 'jemma.a@vocabots.com')),
+        'name' => env('CONTACT_RECIPIENT_NAME', 'Vocabot Inquiries'),
     ],
 
 ];
