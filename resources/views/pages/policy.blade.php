@@ -1,7 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Policies | Vocabot')
-@section('description', "Review Vocabot's privacy, terms, cookie, data security, and AI voice agent policies.")
+@section('title', 'Policies & Terms | Vocabot Privacy, Cookies & Security')
+@section('description', 'Review Vocabot policies regarding data privacy, terms of service, cookie usage, data security, and responsible AI voice technology.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Policies & Terms",
+      "item": "{{ url('/policy') }}"
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/policy.css') }}">
@@ -33,7 +56,7 @@
             <div class="hero-meta">
                 <span>
                     <i class="ri-calendar-line"></i>
-                    Last updated: September 2026
+                    Last updated: October 2026
                 </span>
 
                 <span>

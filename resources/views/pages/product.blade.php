@@ -1,7 +1,71 @@
 @extends('layouts.app')
 
-@section('title', 'Vocabot | AI Voice Agent Platform')
-@section('description', 'Vocabot turns business calls into completed actions with AI voice agents.')
+@section('title', 'Vocabot Platform | AI Voice Receptionist & Automation Engine')
+@section('description', 'Explore the Vocabot voice agent platform: 24/7 inbound call answering, automated reservation booking, conversational FAQ support, and staff handoff.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@graph": [
+    {
+      "@@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ url('/') }}"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 2,
+          "name": "Product",
+          "item": "{{ url('/product') }}"
+        }
+      ]
+    },
+    {
+      "@@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does setup take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Setup typically takes a few days depending on your specific booking rules, hours, FAQs, and phone integration. During your demo, our team will review your workflow and outline the implementation steps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Vocabot automate existing reservation workflows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Vocabot connects to your existing calendar, reservation tool, or CRM via webhooks and APIs to check availability and log bookings in real time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can calls be handed off to a live team member?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can define custom escalation rules so that urgent requests, complex inquiries, or VIP callers are transferred directly to your staff."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the agent conversation style be customized?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Greeting scripts, tone of voice, terminology, and specific business answers are fully configured to reflect your brand."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/product.css') }}">
@@ -116,7 +180,7 @@
                         <div class="dash-header">
                             <div>
                                 <small>OVERVIEW</small>
-                                <h3>Good morning.</h3>
+                                <strong class="dash-greeting" style="display:block; font-size: 1.25rem; font-weight: 700;">Good morning.</strong>
                             </div>
                             <span class="status-pill">● Agent active</span>
                         </div>
@@ -180,7 +244,7 @@
                                     <strong>92%</strong>
                                     <small>confidence</small>
                                 </div>
-                                <h4>Table Reservation</h4>
+                                <strong class="intent-title" style="display:block; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Table Reservation</strong>
                                 <p>
                                     AI is checking configured availability
                                     and preparing the next action.
@@ -205,38 +269,26 @@
                         <b>01</b>
                         <div class="job-icon">◉</div>
                         <h3>24/7 Call Answering</h3>
-                        <p>Answer inbound calls instantly and keep conversations moving.</p>
+                        <p>Answer inbound calls instantly on the first ring and keep conversations moving.</p>
                     </article>
                     <article>
                         <b>02</b>
                         <div class="job-icon">◫</div>
-                        <h3>Appointments & Reservations</h3>
-                        <p>Book, reschedule and cancel using your configured rules.</p>
+                        <h3>Reservations & Booking</h3>
+                        <p>Book, reschedule, or cancel reservations based on your real-time availability rules.</p>
                     </article>
-                    <!--<article>
-                        <b>03</b>
-                        <div class="job-icon">⌁</div>
-                        <h3>Lead Qualification</h3>
-                        <p>Ask the right questions and route qualified opportunities.</p>
-                    </article>-->
                     <article>
                         <b>03</b>
                         <div class="job-icon">◌</div>
-                        <h3>Customer Support</h3>
-                        <p>Answer common questions and escalate when needed.</p>
-                    </article>
-                    <!--<article>
-                        <b>05</b>
-                        <div class="job-icon">▣</div>
-                        <h3>Orders & Transactions</h3>
-                        <p>Capture structured requests through natural conversations.</p>
+                        <h3>Guest FAQs & Support</h3>
+                        <p>Answer recurring questions about hours, directions, menus, and policies instantly.</p>
                     </article>
                     <article>
-                        <b>06</b>
-                        <div class="job-icon">文</div>
-                        <h3>Multilingual Conversations</h3>
-                        <p>Serve customers across languages and markets.</p>
-                    </article>-->
+                        <b>04</b>
+                        <div class="job-icon">↗</div>
+                        <h3>Live Staff Handoff</h3>
+                        <p>Route complex inquiries, VIP customers, or sensitive calls directly to your team.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -394,33 +446,25 @@
                     <details open>
                         <summary>How long does setup take? <b>+</b></summary>
                         <p>
-                            Setup depends on your workflows, integrations
-                            and level of customization. During a demo,
-                            we can map the requirements and explain the
-                            implementation path.
+                            Setup typically takes a few days depending on your specific booking rules, hours, FAQs, and phone integration. During your demo, our team will review your workflow and outline the implementation steps.
                         </p>
                     </details>
                     <details>
-                        <summary>Can Vocabot automate existing workflows? <b>+</b></summary>
+                        <summary>Can Vocabot automate existing reservation workflows? <b>+</b></summary>
                         <p>
-                            Yes. Vocabot can be designed around the processes
-                            your team already uses, with implementation based
-                            on your specific workflow requirements.
+                            Yes. Vocabot connects to your existing calendar, reservation tool, or CRM via webhooks and APIs to check availability and log bookings in real time.
                         </p>
                     </details>
                     <details>
-                        <summary>Can calls be handed to a human? <b>+</b></summary>
+                        <summary>Can calls be handed off to a live team member? <b>+</b></summary>
                         <p>
-                            Yes. Workflows can be designed to escalate
-                            conversations when human assistance is needed.
+                            Yes. You can define custom escalation rules so that urgent requests, complex inquiries, or VIP callers are transferred directly to your staff.
                         </p>
                     </details>
                     <details>
-                        <summary>Can the agent be customized? <b>+</b></summary>
+                        <summary>Can the agent conversation style be customized? <b>+</b></summary>
                         <p>
-                            Yes. Conversation behavior, workflow logic and
-                            business requirements can be configured around
-                            your use case.
+                            Yes. Greeting scripts, tone of voice, terminology, and specific business answers are fully configured to reflect your brand.
                         </p>
                     </details>
                 </div>

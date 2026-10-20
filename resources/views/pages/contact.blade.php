@@ -1,7 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us | Vocabot')
-@section('description', "Have a question, want to see Vocabot in action, or ready to transform your customer conversations? Get in touch with our team.")
+@section('title', 'Contact Vocabot | Request an AI Voice Demo')
+@section('description', 'Get in touch with the Vocabot team to request a personalized demo, discuss pricing, or explore custom AI voice automation for your business.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Contact",
+      "item": "{{ url('/contact') }}"
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/aacontact.css') }}">

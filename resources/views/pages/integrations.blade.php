@@ -1,7 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Integrations | Vocabot AI Voice Agent')
-@section('description', 'Connect Vocabot AI Voice Agent with your CRM, communication, calendar, automation and business tools.')
+@section('title', 'Vocabot Integrations | Connect Phone Lines, CRMs & Calendars')
+@section('description', 'Connect Vocabot AI voice receptionist with your CRM, calendar, booking platform, and communication tools for seamless customer workflows.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Integrations",
+      "item": "{{ url('/integrations') }}"
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/integrations.css') }}">
@@ -28,7 +51,7 @@
                 </h1>
 
                 <p class="hero-lead">
-                    Connect your AI voice agent with the tools you already use. Seamlessly manage restaurant calls, guest conversations, table availability, and reservations from one connected workflow.
+                    Connect your AI voice agent with the tools you already use. Seamlessly manage customer calls, guest inquiries, calendar availability, and bookings from one connected workflow.
                 </p>
 
                 <div class="hero-buttons">
@@ -88,7 +111,7 @@
                 <div class="vocabot-core">
                     <div class="core-ring"></div>
                     <div class="core-inner">
-                        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot">
+                        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot AI Voice Agent Platform Core" width="48" height="48">
                     </div>
                     <strong>Vocabot</strong>
                     <small>AI Voice Agent</small>
@@ -425,7 +448,7 @@
                 <div class="workflow-number">01</div>
                 <div class="workflow-icon">☎</div>
                 <h3>Customer Calls</h3>
-                <p>A guest calls your restaurant to book a table or ask a question.</p>
+                <p>A customer calls your business line to book, make an inquiry, or update an existing reservation.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -434,7 +457,7 @@
                 <div class="workflow-number">02</div>
                 <div class="workflow-icon">✦</div>
                 <h3>Vocabot Understands</h3>
-                <p>The AI understands the guest’s request and collects the details needed for the reservation.</p>
+                <p>The AI understands caller intent and captures the details needed to process the request.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -443,7 +466,7 @@
                 <div class="workflow-number">03</div>
                 <div class="workflow-icon">◈</div>
                 <h3>Availability Checked</h3>
-                <p>The AI checks table availability based on the requested date, time, and party size.</p>
+                <p>Real-time availability is verified automatically against your connected calendar or booking system.</p>
             </div>
 
             <div class="workflow-arrow">→</div>
@@ -451,8 +474,8 @@
             <div class="workflow-card">
                 <div class="workflow-number">04</div>
                 <div class="workflow-icon">✓</div>
-                <h3>Reservation Confirmed</h3>
-                <p>The table is booked and the guest receives an instant confirmation.</p>
+                <h3>Confirmed & Synced</h3>
+                <p>The reservation or request is confirmed with the caller and synced immediately into your backend tools.</p>
             </div>
         </div>
 

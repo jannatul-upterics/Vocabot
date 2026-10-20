@@ -1,7 +1,82 @@
 @extends('layouts.app')
 
-@section('title', 'Vocabot | AI Voice Agents for Every Business')
-@section('description', 'Vocabot provides AI voice agents that answer calls, book appointments, take orders and automate customer conversations 24/7 across industries.')
+@section('title', 'Vocabot | 24/7 AI Voice Receptionist for Inbound Calls & Bookings')
+@section('description', 'Vocabot is an AI voice receptionist that answers business phone calls 24/7, handles reservations and bookings, answers guest FAQs, and transfers complex calls.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@graph": [
+    {
+      "@@type": "SoftwareApplication",
+      "@@id": "{{ url('/') }}#software",
+      "name": "Vocabot",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "description": "24/7 AI voice receptionist platform that automates inbound calls, reservations, and customer FAQs for restaurants and modern businesses.",
+      "url": "{{ url('/') }}",
+      "provider": {
+        "@@id": "{{ url('/') }}#organization"
+      }
+    },
+    {
+      "@@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What can Vocabot do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vocabot is an AI voice receptionist that answers inbound phone calls 24/7. It understands customer intent, manages reservations and bookings, answers business FAQs, captures caller information, and transfers calls to your team when human assistance is required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is Vocabot built for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vocabot is designed for customer-facing businesses where missed phone calls result in lost revenue. It provides specialized out-of-the-box workflows for restaurants, hospitality, and appointment-driven services, while adapting easily to any business with high inbound call volumes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Vocabot transfer calls to a human team member?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can define custom escalation rules so that complex requests, VIP callers, special events, or sensitive situations are transferred directly to your staff."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Vocabot connect to existing booking tools?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vocabot integrates with calendars, reservation platforms, and custom business tools via webhooks and APIs to verify live availability and record bookings automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Vocabot handle calls outside business hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Vocabot operates continuously 24/7/365, allowing your business to take table bookings and answer guest questions late at night, before opening, or during peak rush hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we get started with setup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We work with your team to configure your business rules, hours, frequently asked questions, and booking parameters. Once tested, call forwarding is enabled and your AI voice agent goes live."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/vocabot.css') }}">
@@ -24,7 +99,7 @@
           </h1>
 
           <p class="hero-lead">
-            Vocabot is an AI voice receptionist for restaurants that answers calls, manages table reservations, checks availability, and assists guests with booking-related questions.
+            Vocabot is a 24/7 AI voice receptionist built for restaurants and appointment-driven businesses. It answers inbound calls instantly, checks availability, manages reservations, and resolves customer questions with natural voice intelligence.
           </p>
 
           <div class="hero-actions">
@@ -137,7 +212,7 @@
           <article class="problem-card glass-card reveal">
             <div class="icon-box"><i class="ri-user-forbid-line"></i></div>
             <h3>Long Wait Times</h3>
-            <p>Guests don't want to wait for someone to answer the phone.</p>
+            <p>Callers hang up when kept on hold or sent to voicemail. Vocabot picks up on the first ring.</p>
           </article>
         </div>
       </div>
@@ -162,40 +237,24 @@
 
           <article class="feature-card glass-card reveal">
             <div class="feature-icon"><i class="ri-calendar-check-fill"></i></div>
-            <h3>Reservations</h3>
-            <p>Book, reschedule and cancel reservations using your configured rules.</p>
+            <h3>Table & Reservations</h3>
+            <p>Book, reschedule and cancel reservations using your real-time rules and calendar availability.</p>
             <a href="{{ url('/product') }}" class="feature-link">Automated booking <i class="ri-arrow-right-line"></i></a>
           </article>
 
-          {{--
-          <article class="feature-card glass-card reveal">
-            <div class="feature-icon"><i class="ri-user-search-fill"></i></div>
-            <h3>Lead Qualification</h3>
-            <p>Ask the right questions, capture intent and route qualified opportunities to your team.</p>
-            <a href="{{ url('/product') }}" class="feature-link">Convert more leads <i class="ri-arrow-right-line"></i></a>
-          </article>
-          --}}
-
           <article class="feature-card glass-card reveal">
             <div class="feature-icon"><i class="ri-customer-service-2-fill"></i></div>
-            <h3>Customer Support</h3>
-            <p>Answer common questions, provide information and escalate complex requests when needed.</p>
-            <a href="{{ url('/product') }}" class="feature-link">Smart handoff <i class="ri-arrow-right-line"></i></a>
+            <h3>Guest FAQs & Support</h3>
+            <p>Answer common questions about hours, directions, menus, and policies accurately.</p>
+            <a href="{{ url('/product') }}" class="feature-link">Instant answers <i class="ri-arrow-right-line"></i></a>
           </article>
 
-          <!--<article class="feature-card glass-card reveal">
-            <div class="feature-icon"><i class="ri-shopping-bag-3-fill"></i></div>
-            <h3>Orders & Transactions</h3>
-            <p>Capture orders, requests and structured information through natural voice conversations.</p>
-            <a href="{{ url('/product') }}" class="feature-link">Conversation to action <i class="ri-arrow-right-line"></i></a>
-          </article>-->
-
-          <!--<article class="feature-card glass-card reveal">
-            <div class="feature-icon"><i class="ri-global-fill"></i></div>
-            <h3>Multilingual Conversations</h3>
-            <p>Serve customers across languages and markets with natural, configurable AI conversations.</p>
-            <a href="{{ url('/product') }}" class="feature-link">Global-ready <i class="ri-arrow-right-line"></i></a>
-          </article>-->
+          <article class="feature-card glass-card reveal">
+            <div class="feature-icon"><i class="ri-user-follow-line"></i></div>
+            <h3>Smart Staff Escalation</h3>
+            <p>Seamlessly transfer complex requests, large group inquiries, or VIP callers directly to staff.</p>
+            <a href="{{ url('/product') }}" class="feature-link">Live handoff <i class="ri-arrow-right-line"></i></a>
+          </article>
         </div>
       </div>
     </section>
@@ -295,7 +354,7 @@
             <span class="screen-live"><i class="ri-circle-fill"></i> LIVE</span>
           </div>
           <div class="screen-image">
-            <img id="showcaseImage" src="{{ asset('images/s1.png') }}" alt="Vocabot workflow demonstration">
+            <img id="showcaseImage" src="{{ asset('images/s1.webp') }}" alt="Vocabot AI receptionist interface showing live call automation" width="600" height="420" loading="lazy">
           </div>
           <div class="slider-controls">
             <button id="prevSlide" aria-label="Previous slide"><i class="ri-arrow-left-line"></i></button>
@@ -407,7 +466,7 @@
         <div class="section-heading center reveal">
           <span class="section-label">INTEGRATIONS</span>
           <h2>Works with your <span class="gradient-text">existing workflow.</span></h2>
-          <p>Connect Vocabot to the systems your business already uses. Replace the example labels below with your confirmed integrations.</p>
+          <p>Connect Vocabot with the tools your business relies on — from table management and calendar systems to telephony lines and CRM tools.</p>
         </div>
 
         <div class="integration-grid">
@@ -467,32 +526,32 @@
         <div class="faq-list reveal">
           <article class="faq-item active">
             <button class="faq-question"><span>What can Vocabot do?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Vocabot can answer calls, understand customer intent, book appointments or reservations, qualify leads, capture orders or information, answer configured FAQs and transfer calls to people when needed.</p></div>
+            <div class="faq-answer"><p>Vocabot is an AI voice receptionist that answers inbound phone calls 24/7. It understands customer intent, manages reservations and bookings, answers business FAQs, captures caller information, and transfers calls to your team when human assistance is required.</p></div>
           </article>
 
           <article class="faq-item">
-            <button class="faq-question"><span>Which industries can use Vocabot?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Vocabot is designed as a configurable platform rather than a restaurant-only product. It can support healthcare, hospitality, restaurants, real estate, banking, insurance, retail, education, logistics, professional services and other call-driven businesses.</p></div>
+            <button class="faq-question"><span>Who is Vocabot built for?</span><i class="ri-add-line"></i></button>
+            <div class="faq-answer"><p>Vocabot is designed for customer-facing businesses where missed phone calls result in lost revenue. It provides specialized out-of-the-box workflows for restaurants, hospitality, and appointment-driven services, while adapting easily to any business with high inbound call volumes.</p></div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question"><span>Can Vocabot transfer a call to a human?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Yes. Human handoff can be included for complex requests, sensitive situations or cases that require a member of your team.</p></div>
+            <div class="faq-answer"><p>Yes. You can define custom escalation rules so that complex requests, VIP callers, special events, or sensitive situations are transferred directly to your staff.</p></div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question"><span>Can it connect to our existing systems?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Yes, integrations can be configured around your workflow. The exact systems supported should be confirmed and listed on your final integrations page.</p></div>
+            <div class="faq-answer"><p>Yes. Vocabot integrates with calendars, reservation platforms, and custom business tools via webhooks and APIs to verify live availability and record bookings automatically.</p></div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question"><span>Does it work outside business hours?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Yes. The platform is designed for continuous availability so customer conversations do not have to stop when your team is offline.</p></div>
+            <div class="faq-answer"><p>Yes. Vocabot operates continuously 24/7/365, allowing your business to take table bookings and answer guest questions late at night, before opening, or during peak rush hours.</p></div>
           </article>
 
           <article class="faq-item">
             <button class="faq-question"><span>How long does setup take?</span><i class="ri-add-line"></i></button>
-            <div class="faq-answer"><p>Setup time depends on the workflows, integrations and level of customization required. Avoid promising a fixed setup time until your implementation process is finalized.</p></div>
+            <div class="faq-answer"><p>We work with your team to configure your business rules, hours, frequently asked questions, and booking parameters. Once tested, call forwarding is enabled and your AI voice agent goes live.</p></div>
           </article>
         </div>
       </div>
@@ -508,37 +567,26 @@
 
           <div class="contact-details">
             <a href="mailto:hello@vocabot.ai"><i class="ri-mail-fill"></i> hello@vocabot.ai</a>
-            <a href="tel:+919876543210"><i class="ri-phone-fill"></i> +91 98765 43210</a>
+            <span class="contact-schedule"><i class="ri-time-line"></i> Mon – Fri, 9:00 AM – 6:00 PM</span>
           </div>
         </div>
 
-        <form class="contact-form reveal" id="contactForm">
+        <form class="contact-form reveal" id="contactForm" method="POST" action="{{ route('contact.submit') }}">
+          @csrf
+          <input type="hidden" name="interest" value="Homepage Demo Request">
+
           <div class="form-row">
             <label>Full Name<input type="text" name="name" placeholder="Your name" required></label>
             <label>Work Email<input type="email" name="email" placeholder="you@company.com" required></label>
           </div>
           <div class="form-row">
             <label>Company<input type="text" name="company" placeholder="Company name"></label>
-            <!--<label>Industry<select name="industry">
-              <option value="">Select industry</option>
-              <option>Healthcare</option>
-              <option>Restaurants</option>
-              <option>Real Estate</option>
-              <option>Banking</option>
-              <option>Insurance</option>
-              <option>Retail</option>
-              <option>Hospitality</option>
-              <option>Education</option>
-              <option>Logistics</option>
-              <option>Professional Services</option>
-              <option>Other</option>
-            </select></label>-->
           </div>
           <label>What would you like to automate?
-            <textarea name="message" rows="4" placeholder="Tell us about your calls, bookings, leads or support workflow..."></textarea>
+            <textarea name="message" rows="4" placeholder="Tell us about your calls, bookings, or guest inquiry workflow..."></textarea>
           </label>
-          <button class="btn btn-primary btn-lg" type="submit">Request a Demo <i class="ri-arrow-right-line"></i></button>
-          <!--<p class="form-note" id="formNote">This demo form is front-end only. Connect it to your backend/form service before launch.</p>-->
+          <button class="btn btn-primary btn-lg" type="submit" id="submitBtn">Request a Demo <i class="ri-arrow-right-line"></i></button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" style="display:none; margin-top: 14px; font-weight: 500;"></p>
         </form>
       </div>
     </section>

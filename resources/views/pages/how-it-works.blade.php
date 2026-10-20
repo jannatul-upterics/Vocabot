@@ -1,7 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'How It Works | Vocabot')
-@section('description', 'Vocabot listens, understands, responds, and connects each conversation to the next business action — automatically.')
+@section('title', 'How Vocabot Works | AI Voice Receptionist Workflow')
+@section('description', 'Discover how Vocabot processes inbound calls: from speech recognition and intent understanding to automated table bookings and live staff escalation.')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "How It Works",
+      "item": "{{ url('/how-it-works') }}"
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/how-it-works-new.css') }}">

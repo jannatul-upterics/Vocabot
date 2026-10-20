@@ -12,9 +12,7 @@ Route::get('/', function () {
     return view('pages.index');
 });
 
-Route::get('/vocabot', function () {
-    return view('pages.index');
-});
+Route::permanentRedirect('/vocabot', '/');
 
 Route::get('/product', function () {
     return view('pages.product');
@@ -28,9 +26,7 @@ Route::get('/solutions', function () {
     return view('pages.solutions');
 });
 
-Route::get('/sectors', function () {
-    return view('pages.solutions');
-});
+Route::permanentRedirect('/sectors', '/solutions');
 
 Route::get('/integrations', function () {
     return view('pages.integrations');
@@ -45,6 +41,4 @@ Route::get('/policy', function () {
     return view('pages.policy');
 });
 
-Route::get('/policies', function () {
-    return view('pages.policy');
-});
+Route::permanentRedirect('/policies', '/policy');

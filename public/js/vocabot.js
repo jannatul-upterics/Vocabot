@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRoiCalculator();
   initScrollReveal();
   initAudioPlayer();
+  initContactForm();
 });
 
 /* =========================================================
@@ -131,22 +132,23 @@ function initShowcaseSlider() {
 
   const initialSrc = showcaseImage.getAttribute("src") || "";
   const pathPrefix = initialSrc.includes("images/") ? "images/" : "";
+  const ext = initialSrc.includes(".webp") ? ".webp" : ".png";
 
   const slides = [
     {
-      image: pathPrefix + "s1.png",
+      image: pathPrefix + "s1" + ext,
       alt: "Vocabot AI 24/7 automated call receptionist - Always On"
     },
     {
-      image: pathPrefix + "s2.png",
+      image: pathPrefix + "s2" + ext,
       alt: "Vocabot AI understanding caller intent - Smart NLU"
     },
     {
-      image: pathPrefix + "s3.png",
+      image: pathPrefix + "s3" + ext,
       alt: "Vocabot automated workflow execution and booking confirmation"
     },
     {
-      image: pathPrefix + "s4.png",
+      image: pathPrefix + "s4" + ext,
       alt: "Vocabot conversation history and business analytics"
     }
   ];
@@ -433,5 +435,69 @@ function initAudioPlayer() {
 
   audio.addEventListener("ended", () => {
     visualizer?.classList.remove("playing");
+  });
+}
+
+/* =========================================================
+   8. HOMEPAGE CONTACT FORM SUBMISSION
+   ========================================================= */
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+  const submitBtn = document.getElementById("submitBtn");
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending... <i class="ri-loader-4-line"></i>';
+    }
+
+    if (formStatus) {
+      formStatus.style.display = "none";
+      formStatus.textContent = "";
+      formStatus.style.color = "var(--text-main, #f8fafc)";
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action || "/contact", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (formStatus) {
+        formStatus.style.display = "block";
+        if (response.ok && data.success) {
+          formStatus.textContent = "Thank you! Your demo request has been received. Our team will contact you shortly.";
+          formStatus.style.color = "#34d399";
+          form.reset();
+        } else {
+          formStatus.textContent = data.message || "Something went wrong. Please try again or email us directly at hello@vocabot.ai.";
+          formStatus.style.color = "#f87171";
+        }
+      }
+    } catch (err) {
+      if (formStatus) {
+        formStatus.style.display = "block";
+        formStatus.textContent = "Unable to connect. Please email us at hello@vocabot.ai.";
+        formStatus.style.color = "#f87171";
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Request a Demo <i class="ri-arrow-right-line"></i>';
+      }
+    }
   });
 }
