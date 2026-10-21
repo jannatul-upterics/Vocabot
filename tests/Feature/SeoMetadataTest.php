@@ -180,4 +180,158 @@ class SeoMetadataTest extends TestCase
             $this->assertLessThan(150000, filesize($path), "$img should be compressed under 150KB");
         }
     }
+
+    /**
+     * Test each page has exactly one H1 heading.
+     */
+    public function test_each_page_has_exactly_one_h1_heading(): void
+    {
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            $h1Nodes = $xpath->query('//h1');
+            $this->assertCount(1, $h1Nodes, "Page $route should have exactly one <h1>, found {$h1Nodes->length}");
+            $this->assertNotEmpty(trim($h1Nodes->item(0)->textContent), "Page $route has an empty <h1>");
+        }
+    }
+
+    /**
+     * Test heading hierarchy has no skipped levels (e.g. h1 to h3 without h2).
+     */
+    public function test_heading_hierarchy(): void
+    {
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            $headings = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
+            $currentLevel = 0;
+            foreach ($headings as $h) {
+                $level = (int) substr($h->nodeName, 1);
+                $this->assertNotEmpty(trim($h->textContent), "Empty <{$h->nodeName}> found on $route");
+                if ($currentLevel > 0) {
+                    $this->assertLessThanOrEqual(
+                        $currentLevel + 1,
+                        $level,
+                        "Heading level skipped on $route: jumped from h{$currentLevel} to h{$level} ('".trim($h->textContent)."')"
+                    );
+                }
+                $currentLevel = $level;
+            }
+        }
+    }
+
+    /**
+     * Test all images have non-empty alt attributes.
+     */
+    public function test_all_images_have_alt_attributes(): void
+    {
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            $images = $xpath->query('//img');
+            foreach ($images as $img) {
+                $src = $img->getAttribute('src');
+                $alt = $img->getAttribute('alt');
+                $this->assertTrue($img->hasAttribute('alt'), "Image missing alt attribute on $route: $src");
+                $this->assertNotEmpty(trim($alt), "Image has empty alt attribute on $route: $src");
+            }
+        }
+    }
+
+    /**
+     * Test all local CSS and JS assets referenced exist on disk.
+     */
+    public function test_local_assets_referenced_in_pages_exist(): void
+    {
+        $checkedAssets = 0;
+
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            // Check CSS links
+            $cssLinks = $xpath->query('//link[@rel="stylesheet"]/@href');
+            foreach ($cssLinks as $css) {
+                $href = $css->textContent;
+                $host = parse_url($href, PHP_URL_HOST);
+                if ($host === null || $host === 'localhost' || $host === 'vocabot.ai') {
+                    $path = parse_url($href, PHP_URL_PATH);
+                    $localPath = public_path(ltrim($path, '/'));
+                    $this->assertFileExists($localPath, "Referenced CSS file does not exist: $href on $route");
+                    $checkedAssets++;
+                }
+            }
+
+            // Check JS scripts
+            $scripts = $xpath->query('//script/@src');
+            foreach ($scripts as $script) {
+                $src = $script->textContent;
+                $host = parse_url($src, PHP_URL_HOST);
+                if ($host === null || $host === 'localhost' || $host === 'vocabot.ai') {
+                    $path = parse_url($src, PHP_URL_PATH);
+                    $localPath = public_path(ltrim($path, '/'));
+                    $this->assertFileExists($localPath, "Referenced script file does not exist: $src on $route");
+                    $checkedAssets++;
+                }
+            }
+        }
+
+        $this->assertGreaterThan(0, $checkedAssets, 'No local assets were found and checked across pages');
+    }
+
+    /**
+     * Test all internal links across pages resolve to valid responses.
+     */
+    public function test_all_internal_links_resolve(): void
+    {
+        $checkedUrls = [];
+
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            $links = $xpath->query('//a/@href');
+            foreach ($links as $link) {
+                $href = $link->textContent;
+                if (empty($href) || str_starts_with($href, '#') || str_starts_with($href, 'mailto:') || str_starts_with($href, 'tel:') || str_starts_with($href, 'javascript:')) {
+                    continue;
+                }
+
+                $parsed = parse_url($href);
+                $host = $parsed['host'] ?? null;
+                if ($host === null || $host === 'localhost' || $host === 'vocabot.ai') {
+                    $path = $parsed['path'] ?? '/';
+                    if (! isset($checkedUrls[$path])) {
+                        $linkResp = $this->get($path);
+                        $this->assertContains(
+                            $linkResp->getStatusCode(),
+                            [200, 301, 302],
+                            "Broken internal link found on $route: $href (status: {$linkResp->getStatusCode()})"
+                        );
+                        $checkedUrls[$path] = true;
+                    }
+                }
+            }
+        }
+
+        $this->assertGreaterThan(5, count($checkedUrls), 'Expected at least 5 unique internal links checked');
+    }
 }

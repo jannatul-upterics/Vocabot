@@ -33,4 +33,13 @@ class ExampleTest extends TestCase
         $this->get('/sectors')->assertStatus(301)->assertRedirect('/solutions');
         $this->get('/policies')->assertStatus(301)->assertRedirect('/policy');
     }
+
+    public function test_unmapped_administrative_routes_return_404(): void
+    {
+        $unmappedRoutes = ['/admin', '/dashboard', '/login', '/register', '/wp-admin'];
+
+        foreach ($unmappedRoutes as $route) {
+            $this->get($route)->assertStatus(404);
+        }
+    }
 }

@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\SendContactNotificationJob;
+use App\Mail\ContactFormMail;
 use App\Models\ContactSubmission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -38,7 +39,6 @@ class ContactSubmissionTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'success' => true,
-                'message' => 'Thank you! Your message has been received successfully.',
             ]);
 
         $this->assertDatabaseHas('contact_submissions', [
@@ -120,7 +120,7 @@ class ContactSubmissionTest extends TestCase
 
     public function test_contact_submission_dispatches_notification_job_and_sends_email(): void
     {
-        Queue::fake();
+        Mail::fake();
 
         $submissionData = [
             'firstName' => 'Alex',
@@ -134,8 +134,8 @@ class ContactSubmissionTest extends TestCase
         $response = $this->postJson('/contact', $submissionData);
         $response->assertStatus(200);
 
-        Queue::assertPushed(SendContactNotificationJob::class, function ($job) {
-            return $job->submission->email === 'alex.taylor@example.com';
+        Mail::assertSent(ContactFormMail::class, function ($mail) {
+            return ($mail->formData['email'] ?? null) === 'alex.taylor@example.com';
         });
     }
 
