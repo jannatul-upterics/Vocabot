@@ -10,19 +10,33 @@
   <meta name="robots" content="@yield('robots', 'index, follow, max-image-preview:large')">
   <link rel="canonical" href="@yield('canonical', url()->current())">
 
-  <!-- Open Graph / Social Sharing -->
+  <!-- Author & General Meta -->
+  <meta name="author" content="Vocabot">
+
+  <!-- Open Graph / Facebook / Instagram / LinkedIn -->
   <meta property="og:site_name" content="Vocabot">
   <meta property="og:type" content="@yield('og_type', 'website')">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="@yield('title', 'Vocabot | 24/7 AI Voice Receptionist for Business')">
   <meta property="og:description" content="@yield('description', 'Vocabot is a 24/7 AI voice receptionist that answers customer calls, manages reservations and bookings, answers FAQs, and streamlines business workflows.')">
   <meta property="og:url" content="@yield('canonical', url()->current())">
   <meta property="og:image" content="{{ asset('images/logo2.png') }}">
+  <meta property="og:image:secure_url" content="{{ asset('images/logo2.png') }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vocabot - 24/7 AI Voice Receptionist for Business">
 
-  <!-- Twitter Card -->
+  <!-- X (Twitter) Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@yield('twitter_site', '@vocabot')">
+  <meta name="twitter:creator" content="@yield('twitter_creator', '@vocabot')">
   <meta name="twitter:title" content="@yield('title', 'Vocabot | 24/7 AI Voice Receptionist for Business')">
   <meta name="twitter:description" content="@yield('description', 'Vocabot is a 24/7 AI voice receptionist that answers customer calls, manages reservations and bookings, answers FAQs, and streamlines business workflows.')">
   <meta name="twitter:image" content="{{ asset('images/logo2.png') }}">
+  <meta name="twitter:image:alt" content="Vocabot - 24/7 AI Voice Receptionist for Business">
+  <meta name="twitter:domain" content="{{ parse_url(url('/'), PHP_URL_HOST) ?? 'vocabot.ai' }}">
+  <meta name="twitter:url" content="@yield('canonical', url()->current())">
 
   <meta name="theme-color" content="#070313">
 

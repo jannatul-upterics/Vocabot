@@ -87,6 +87,41 @@ class SeoMetadataTest extends TestCase
     }
 
     /**
+     * Test social metatags for Facebook, Instagram, LinkedIn, and X (Twitter).
+     */
+    public function test_social_metatags_for_facebook_instagram_linkedin_and_x(): void
+    {
+        foreach ($this->routes as $route) {
+            $response = $this->get($route);
+            $html = $response->getContent();
+            $dom = new DOMDocument;
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            // Open Graph (Facebook, Instagram, LinkedIn)
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:site_name"]/@content')->length, "Missing og:site_name on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:locale"]/@content')->length, "Missing og:locale on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:image:secure_url"]/@content')->length, "Missing og:image:secure_url on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:image:width"]/@content')->length, "Missing og:image:width on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:image:height"]/@content')->length, "Missing og:image:height on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@property="og:image:alt"]/@content')->length, "Missing og:image:alt on $route");
+
+            // X (Twitter)
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:card"]/@content')->length, "Missing twitter:card on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:site"]/@content')->length, "Missing twitter:site on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:creator"]/@content')->length, "Missing twitter:creator on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:title"]/@content')->length, "Missing twitter:title on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:description"]/@content')->length, "Missing twitter:description on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:image"]/@content')->length, "Missing twitter:image on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:domain"]/@content')->length, "Missing twitter:domain on $route");
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="twitter:url"]/@content')->length, "Missing twitter:url on $route");
+
+            // Author
+            $this->assertGreaterThan(0, $xpath->query('//meta[@name="author"]/@content')->length, "Missing author meta tag on $route");
+        }
+    }
+
+    /**
      * Test JSON-LD structured data is present and valid JSON.
      */
     public function test_json_ld_structured_data_validity(): void
