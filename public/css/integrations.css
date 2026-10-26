@@ -876,6 +876,8 @@ h1, h2, h3, h4 {
 
 .integration-card {
     min-height: 270px;
+    display: flex;
+    flex-direction: column;
     padding: 25px;
     border-radius: var(--radius);
     background: linear-gradient(145deg, rgba(39, 18, 89, 0.58), rgba(10, 5, 27, 0.72));
@@ -972,7 +974,8 @@ h1, h2, h3, h4 {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    margin-top: 20px;
+    margin-top: auto;
+    padding-top: 16px;
     color: var(--lavender);
     font-size: 12px;
     font-weight: 700;
@@ -1319,7 +1322,7 @@ h1, h2, h3, h4 {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 45px;
 }
 
@@ -1536,11 +1539,12 @@ section, header, main {
     }
 
     .footer-grid {
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 40px 30px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px 25px;
     }
 
     .footer-brand {
+        grid-column: 1 / -1;
         max-width: 100%;
     }
 }

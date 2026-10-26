@@ -159,6 +159,18 @@ ul{
   background:#7c3aed;
 }
 
+.grid-overlay{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  opacity:.14;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:70px 70px;
+}
+
 
 /* =========================================================
    TYPOGRAPHY
@@ -1223,13 +1235,15 @@ p{
 
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
 
-  gap:18px;
+  gap:20px;
 }
 
 .feature-card{
-  min-height:270px;
+  min-height:240px;
+  display:flex;
+  flex-direction:column;
 }
 
 .feature-link{
@@ -1237,7 +1251,8 @@ p{
   gap:5px;
   align-items:center;
 
-  margin-top:20px;
+  margin-top:auto;
+  padding-top:16px;
 
   color:#c084fc;
 
@@ -2293,7 +2308,7 @@ p{
 .footer-grid{
   display:grid;
 
-  grid-template-columns:2fr 1fr 1fr;
+  grid-template-columns:2fr 1fr 1fr 1fr;
 
   gap:45px;
 }
@@ -2541,11 +2556,16 @@ p{
   }
 
   .sector-grid{
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .footer-grid{
-    grid-template-columns:2fr 1fr 1fr;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px 25px;
+  }
+
+  .footer-brand{
+    grid-column:1 / -1;
   }
 
   .faq-grid{

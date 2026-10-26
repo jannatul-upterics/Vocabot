@@ -20,8 +20,8 @@
   <meta property="og:title" content="@yield('title', 'Vocabot | 24/7 AI Voice Receptionist for Business')">
   <meta property="og:description" content="@yield('description', 'Vocabot is a 24/7 AI voice receptionist that answers customer calls, manages reservations and bookings, answers FAQs, and streamlines business workflows.')">
   <meta property="og:url" content="@yield('canonical', url()->current())">
-  <meta property="og:image" content="{{ asset('images/logo2.png') }}">
-  <meta property="og:image:secure_url" content="{{ asset('images/logo2.png') }}">
+  <meta property="og:image" content="{{ asset('images/logo2.webp') }}">
+  <meta property="og:image:secure_url" content="{{ asset('images/logo2.webp') }}">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,14 +33,14 @@
   <meta name="twitter:creator" content="@yield('twitter_creator', '@vocabot')">
   <meta name="twitter:title" content="@yield('title', 'Vocabot | 24/7 AI Voice Receptionist for Business')">
   <meta name="twitter:description" content="@yield('description', 'Vocabot is a 24/7 AI voice receptionist that answers customer calls, manages reservations and bookings, answers FAQs, and streamlines business workflows.')">
-  <meta name="twitter:image" content="{{ asset('images/logo2.png') }}">
+  <meta name="twitter:image" content="{{ asset('images/logo2.webp') }}">
   <meta name="twitter:image:alt" content="Vocabot - 24/7 AI Voice Receptionist for Business">
   <meta name="twitter:domain" content="{{ parse_url(url('/'), PHP_URL_HOST) ?? 'vocabot.ai' }}">
   <meta name="twitter:url" content="@yield('canonical', url()->current())">
 
   <meta name="theme-color" content="#070313">
 
-  <link rel="icon" href="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}">
+  <link rel="icon" href="{{ asset('images/logo2.webp') }}?v={{ filemtime(public_path('images/logo2.webp')) }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lato:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
         "url": "{{ url('/') }}",
         "logo": {
           "@@type": "ImageObject",
-          "url": "{{ asset('images/logo2.png') }}"
+          "url": "{{ asset('images/logo2.webp') }}"
         },
         "email": "hello@vocabot.ai",
         "description": "Vocabot provides 24/7 AI voice receptionists for business call answering, reservations, and customer workflows."
@@ -98,3 +98,4 @@
   @yield('scripts')
 </body>
 </html>
+

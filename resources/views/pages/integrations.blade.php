@@ -111,7 +111,7 @@
                 <div class="vocabot-core">
                     <div class="core-ring"></div>
                     <div class="core-inner">
-                        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot AI Voice Agent Platform Core" width="48" height="48">
+                        <img src="{{ asset('images/logo2.webp') }}?v={{ filemtime(public_path('images/logo2.webp')) }}" alt="Vocabot AI Voice Agent Platform Core" width="48" height="48">
                     </div>
                     <strong>Vocabot</strong>
                     <small>AI Voice Agent</small>
@@ -523,3 +523,4 @@
 @section('scripts')
   <script src="{{ asset('js/integrations.js') }}"></script>
 @endsection
+

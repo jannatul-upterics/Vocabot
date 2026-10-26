@@ -3,7 +3,7 @@
   <div class="container footer-grid">
     <div class="footer-brand">
       <a class="brand logo" href="{{ url('/') }}">
-        <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot AI Voice Receptionist Logo" width="36" height="36">
+        <img src="{{ asset('images/logo2.webp') }}?v={{ filemtime(public_path('images/logo2.webp')) }}" alt="Vocabot AI Voice Receptionist Logo" width="36" height="36">
         <span><b>Voca</b>bot</span>
       </a>
       <p>24/7 AI voice receptionist that answers customer calls, manages reservations, and turns conversations into completed workflows.</p>
@@ -40,7 +40,8 @@
   </div>
 
   <div class="container footer-bottom">
-    <span>© <span id="year">{{ date('Y') }}</span> Vocabot. All rights reserved.</span>
+    <span>&copy; <span id="year">{{ date('Y') }}</span> Vocabot. All rights reserved.</span>
     <span>AI voice automation for modern businesses.</span>
   </div>
 </footer>
+

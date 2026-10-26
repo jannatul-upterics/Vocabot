@@ -2,7 +2,7 @@
 <header class="navbar" id="navbar">
   <div class="container nav-inner">
     <a class="brand logo" href="{{ url('/') }}" aria-label="Vocabot home">
-      <img src="{{ asset('images/logo2.png') }}?v={{ filemtime(public_path('images/logo2.png')) }}" alt="Vocabot AI Voice Receptionist Logo" width="36" height="36">
+      <img src="{{ asset('images/logo2.webp') }}?v={{ filemtime(public_path('images/logo2.webp')) }}" alt="Vocabot AI Voice Receptionist Logo" width="36" height="36">
       <span><b>Voca</b>bot</span>
     </a>
 
@@ -37,3 +37,4 @@
     <a href="{{ Request::is('/') ? '#contact' : url('/contact') }}" class="mobile-demo">Book a Demo</a>
   </div>
 </header>
+
