@@ -108,8 +108,8 @@ class ContactSubmissionRequest extends FormRequest
             'email' => ['required', 'string', 'email:rfc', 'max:255'],
             'company' => ['nullable', 'string', 'max:255'],
             'interest' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'message' => ['nullable', 'string', 'max:5000'],
+            'phone' => ['nullable', 'regex:/^[+\d]?[\d\s-]{7,15}$/', 'max:50'],
+            'message' => ['required', 'string', 'max:5000'],
         ];
     }
 

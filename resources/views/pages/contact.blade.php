@@ -27,7 +27,7 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/aacontact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aacontact.css') }}?v={{ filemtime(public_path('css/aacontact.css')) }}">
 @endsection
 
 @section('content')
@@ -122,11 +122,13 @@
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}" placeholder="Your first name" autocomplete="given-name" required>
+                        <div class="error-message" id="error-firstName"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" name="lastName" value="{{ old('lastName') }}" placeholder="Your last name" autocomplete="family-name" required>
+                        <div class="error-message" id="error-lastName"></div>
                         </div>
                     </div>
 
@@ -134,19 +136,21 @@
                     <div class="form-group">
                         <label for="email">Work Email</label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="you@company.com" autocomplete="email" required>
+                        <div class="error-message" id="error-email"></div>
                     </div>
 
                     <!-- Company -->
                     <div class="form-group">
                         <label for="company">Company</label>
                         <input type="text" id="company" name="company" value="{{ old('company') }}" placeholder="Your company name" autocomplete="organization">
+                        <div class="error-message" id="error-company"></div>
                     </div>
 
                     <!-- Interest -->
                     <div class="form-group">
                         <label for="interest">What can we help with?</label>
                         <select id="interest" name="interest" required>
-                            <option value="">Select an option</option>
+                            <option value="" disabled {{ old('interest') ? '' : 'selected' }}>Select an option</option>
                             <option value="Book a Demo" {{ old('interest') == 'Book a Demo' ? 'selected' : '' }}>Book a Demo</option>
                             <option value="Voice AI Agent" {{ old('interest') == 'Voice AI Agent' ? 'selected' : '' }}>Voice AI Agent</option>
                             <option value="Customer Support" {{ old('interest') == 'Customer Support' ? 'selected' : '' }}>Customer Support</option>
@@ -154,21 +158,29 @@
                             <option value="Integrations" {{ old('interest') == 'Integrations' ? 'selected' : '' }}>Integrations</option>
                             <option value="Other" {{ old('interest') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
+                        <div class="error-message" id="error-interest">@error('interest') {{ $message }} @enderror</div>
                     </div>
 
                     <!-- Message -->
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements...">{{ old('message') }}</textarea>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements..." required>{{ old('message') }}</textarea>
+                        <div class="error-message" id="error-message">@error('message') {{ $message }} @enderror</div>
                     </div>
 
                     <!-- Submit -->
-                    <button type="submit" class="submit-btn">
-                        Send Message <span>→</span>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send Message <span>&rarr;</span>
                     </button>
 
                     <!-- Form Status -->
-                    <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    <p class="form-status" id="formStatus" role="status" aria-live="polite">
+                        @if(session('success'))
+                            <span class="success">{{ session('success') }}</span>
+                        @elseif($errors->any())
+                            <span class="error">{{ $errors->first() }}</span>
+                        @endif
+                    </p>
                 </form>
             </div>
         </div>
@@ -195,5 +207,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/contact.js') }}"></script>
+    <script src="{{ asset('js/contact.js') }}?v={{ filemtime(public_path('js/contact.js')) }}"></script>
 @endsection

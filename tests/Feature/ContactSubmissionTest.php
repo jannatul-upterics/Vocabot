@@ -149,6 +149,7 @@ class ContactSubmissionTest extends TestCase
             'lastName' => 'Test',
             'email' => 'crash@example.com',
             'interest' => 'Voice AI Agent',
+            'message' => 'Test crash',
         ];
 
         $response = $this->postJson('/contact', $submissionData);

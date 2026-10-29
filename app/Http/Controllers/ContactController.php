@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactSubmissionRequest;
-
+use App\Mail\ContactFormMail;
 use App\Models\ContactSubmission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Throwable;
 
@@ -62,8 +63,8 @@ class ContactController extends Controller
 
                 // Send notification email synchronously with error handling
                 try {
-                    \Illuminate\Support\Facades\Mail::to(config('mail.contact_recipient.address'))
-                        ->send(new \App\Mail\ContactFormMail($request->all(), now()->setTimezone('Asia/Kolkata')->format('d F Y, h:i A') . ' IST'));
+                    Mail::to(config('mail.contact_recipient.address'))
+                        ->send(new ContactFormMail($request->all(), now()->setTimezone('Asia/Kolkata')->format('d F Y, h:i A').' IST'));
                     $emailSent = true;
                 } catch (Throwable $e) {
                     $emailSent = false;

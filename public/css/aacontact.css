@@ -959,6 +959,23 @@ button {
 
 
 /* =========================================================
+   ERROR MESSAGES
+   ========================================================= */
+
+.error-message {
+    color: #ff8a8a;
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.4;
+    display: none;
+}
+
+.error-message:not(:empty) {
+    display: block;
+}
+
+
+/* =========================================================
    SUBMIT BUTTON
    ========================================================= */
 
@@ -981,9 +998,12 @@ button {
 
     box-shadow: 0 14px 36px rgba(124, 58, 237, 0.28);
 
+    cursor: pointer;
+
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease;
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
 }
 
 .submit-btn span {
@@ -992,22 +1012,57 @@ button {
     font-size: 18px;
 }
 
-.submit-btn:hover {
+.submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
 
     box-shadow: 0 20px 48px rgba(124, 58, 237, 0.42);
 }
 
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .form-status {
     min-height: 20px;
 
-    margin-top: 13px;
+    margin-top: 16px;
 
     text-align: center;
 
     color: var(--lavender);
 
-    font-size: 13px;
+    font-size: 14px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    transition: all 0.25s ease;
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.success {
+    display: block;
+    color: #4cd964;
+    background: rgba(76, 217, 100, 0.12);
+    border: 1px solid rgba(76, 217, 100, 0.3);
+    padding: 12px 18px;
+    border-radius: 12px;
+}
+
+.form-status.error {
+    display: block;
+    color: #ff8a8a;
+    background: rgba(255, 138, 138, 0.12);
+    border: 1px solid rgba(255, 138, 138, 0.3);
+    padding: 12px 18px;
+    border-radius: 12px;
 }
 
 
