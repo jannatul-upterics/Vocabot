@@ -831,23 +831,46 @@ p {
   overflow: hidden;
   border-block: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.018);
-  white-space: nowrap;
 }
 
-.marquee {
+.marquee-track {
   display: flex;
-  justify-content: center;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee-band:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-set {
+  display: flex;
   align-items: center;
   gap: 30px;
-  padding: 19px;
+  padding: 19px 15px;
   color: var(--muted);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.14em;
+  white-space: nowrap;
 }
 
-.marquee b {
+.marquee-set b {
   color: var(--lavender);
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-set:last-child {
+    display: none;
+  }
 }
 
 .section {
@@ -1831,3 +1854,45 @@ p {
   opacity: 1;
   transform: none;
 }
+
+
+/* ==========================================================================
+   LIVE CONVERSATION — WAVEFORM ANIMATION
+   ========================================================================== */
+
+@keyframes waveBar {
+  0%,
+  100% { transform: scaleY(0.25); }
+  50%  { transform: scaleY(1); }
+}
+
+/* Bars sit at a short resting height by default */
+.wave i {
+  transform-origin: center;
+  transform: scaleY(0.25);
+  /* transition eases the snap back to idle when stopped */
+  transition: transform 0.35s ease;
+}
+
+/* When the waveform is playing, animate each bar independently */
+.wave.playing i {
+  animation: waveBar var(--wave-dur, 0.9s) ease-in-out infinite;
+  transition: none;
+}
+
+/* Stagger each of the 15 bars with a unique duration + delay */
+.wave.playing i:nth-child(1)  { --wave-dur: 0.80s; animation-delay: 0.00s; }
+.wave.playing i:nth-child(2)  { --wave-dur: 0.65s; animation-delay: 0.12s; }
+.wave.playing i:nth-child(3)  { --wave-dur: 0.95s; animation-delay: 0.05s; }
+.wave.playing i:nth-child(4)  { --wave-dur: 0.70s; animation-delay: 0.22s; }
+.wave.playing i:nth-child(5)  { --wave-dur: 0.85s; animation-delay: 0.08s; }
+.wave.playing i:nth-child(6)  { --wave-dur: 0.60s; animation-delay: 0.30s; }
+.wave.playing i:nth-child(7)  { --wave-dur: 1.00s; animation-delay: 0.15s; }
+.wave.playing i:nth-child(8)  { --wave-dur: 0.75s; animation-delay: 0.00s; }
+.wave.playing i:nth-child(9)  { --wave-dur: 0.88s; animation-delay: 0.18s; }
+.wave.playing i:nth-child(10) { --wave-dur: 0.55s; animation-delay: 0.28s; }
+.wave.playing i:nth-child(11) { --wave-dur: 0.92s; animation-delay: 0.10s; }
+.wave.playing i:nth-child(12) { --wave-dur: 0.68s; animation-delay: 0.25s; }
+.wave.playing i:nth-child(13) { --wave-dur: 0.82s; animation-delay: 0.03s; }
+.wave.playing i:nth-child(14) { --wave-dur: 0.72s; animation-delay: 0.20s; }
+.wave.playing i:nth-child(15) { --wave-dur: 0.90s; animation-delay: 0.35s; }

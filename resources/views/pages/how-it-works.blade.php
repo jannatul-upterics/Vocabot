@@ -88,7 +88,7 @@
   </section>
 
   <!-- JOURNEY -->
-  <section class="journey" id="product">
+  <section class="journey" id="how-it-works-steps">
     <div class="container">
       <div class="section-intro">
         <div>

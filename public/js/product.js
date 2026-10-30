@@ -118,23 +118,33 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     const playDemo = document.getElementById("playDemo");
+    const waveEl = playDemo ? playDemo.closest(".transcript")?.querySelector(".wave") : null;
 
     if (playDemo) {
         const playIcon = playDemo.querySelector(".play-icon");
         const playText = playDemo.querySelector(".play-text");
-        let isPlaying = false;
+        const demoAudio = new Audio("/demo.mp3");
+
+        const resetButton = () => {
+            if (playIcon) playIcon.textContent = "▶";
+            if (playText) playText.textContent = "Play conversation";
+            playDemo.classList.remove("playing");
+            if (waveEl) waveEl.classList.remove("playing");
+        };
+
+        demoAudio.addEventListener("ended", resetButton);
 
         playDemo.addEventListener("click", () => {
-            isPlaying = !isPlaying;
-
-            if (isPlaying) {
+            if (demoAudio.paused) {
+                demoAudio.currentTime = 0;
+                demoAudio.play();
                 if (playIcon) playIcon.textContent = "❚❚";
                 if (playText) playText.textContent = "Pause conversation";
                 playDemo.classList.add("playing");
+                if (waveEl) waveEl.classList.add("playing");
             } else {
-                if (playIcon) playIcon.textContent = "▶";
-                if (playText) playText.textContent = "Play conversation";
-                playDemo.classList.remove("playing");
+                demoAudio.pause();
+                resetButton();
             }
         });
     }

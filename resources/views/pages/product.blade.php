@@ -129,20 +129,38 @@
         </section>
 
         <!-- ================= MARQUEE ================= -->
-        <section class="marquee-band">
-            <div class="marquee">
-                <span>ANSWER CALLS</span>
-                <b>✦</b>
-                <span>UNDERSTAND REQUESTS</span>
-                <b>✦</b>
-                <span>CHECK AVAILABILITY</span>
-                <b>✦</b>
-                <span>MANAGE BOOKINGS</span>
-                <b>✦</b>
-                <span>ANSWER QUESTIONS</span>
-                <b>✦</b>
-                <span>HANDLE CANCELLATIONS</span>
-                <b>✦</b>
+        <section class="marquee-band" aria-hidden="true">
+            <div class="marquee-track">
+                <!-- First set -->
+                <div class="marquee-set" aria-hidden="true">
+                    <span>ANSWER CALLS</span>
+                    <b>✦</b>
+                    <span>UNDERSTAND REQUESTS</span>
+                    <b>✦</b>
+                    <span>CHECK AVAILABILITY</span>
+                    <b>✦</b>
+                    <span>MANAGE BOOKINGS</span>
+                    <b>✦</b>
+                    <span>ANSWER QUESTIONS</span>
+                    <b>✦</b>
+                    <span>HANDLE CANCELLATIONS</span>
+                    <b>✦</b>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-set" aria-hidden="true">
+                    <span>ANSWER CALLS</span>
+                    <b>✦</b>
+                    <span>UNDERSTAND REQUESTS</span>
+                    <b>✦</b>
+                    <span>CHECK AVAILABILITY</span>
+                    <b>✦</b>
+                    <span>MANAGE BOOKINGS</span>
+                    <b>✦</b>
+                    <span>ANSWER QUESTIONS</span>
+                    <b>✦</b>
+                    <span>HANDLE CANCELLATIONS</span>
+                    <b>✦</b>
+                </div>
             </div>
         </section>
 
@@ -295,7 +313,7 @@
 
         <!-- ================= CONVERSATION ================= -->
         <section id="conversation" class="section conversation">
-            <div class="wrap convo-grid">
+            <div class="wrap convo-grid" id="demo">
                 <div class="convo-copy reveal">
                     <div class="eyebrow">WATCH AI WORK</div>
                     <h2>Conversation goes in.<br><span>Action comes out.</span></h2>

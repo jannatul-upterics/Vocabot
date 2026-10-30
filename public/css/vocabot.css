@@ -524,6 +524,75 @@ p{
 
   position:absolute;
 
+  top:76px; left:16px; right:16px;
+
+  width:auto;
+
+  padding:16px;
+
+  flex-direction:column;
+  gap:4px;
+
+  background:rgba(12,5,28,.96);
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  box-shadow:var(--shadow);
+
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transform:translateY(-10px);
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease,
+    transform .25s ease;
+
+  z-index:10001;
+}
+
+/* Mobile menu link styles */
+.mobile-menu a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transition: color .25s ease;
+}
+.mobile-menu a:hover,
+.mobile-menu a.active {
+  color: var(--text);
+}
+.mobile-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--lavender);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(192,132,252,.45);
+  transition: width .25s ease;
+}
+.mobile-menu a:hover::after,
+.mobile-menu a.active::after {
+  width: 100%;
+}
+  display:none;
+
+  position:absolute;
+
   top:76px;
   left:16px;
   right:16px;

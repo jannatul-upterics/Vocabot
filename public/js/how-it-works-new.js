@@ -583,6 +583,37 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        /* Scroll to the Journey section (the four-step how-it-works content) */
+
+        const journeySection =
+          document.getElementById(
+            "how-it-works-steps"
+          );
+
+
+        if (journeySection) {
+
+          const navbarHeight =
+            navbar
+              ? navbar.offsetHeight
+              : 76;
+
+          const targetPosition =
+            journeySection
+              .getBoundingClientRect()
+              .top +
+            window.scrollY -
+            navbarHeight -
+            16;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+          });
+
+        }
+
+
         /* Reset after 5 seconds */
 
         demoTimeout =
