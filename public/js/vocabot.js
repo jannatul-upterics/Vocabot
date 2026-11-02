@@ -439,65 +439,281 @@ function initAudioPlayer() {
 }
 
 /* =========================================================
-   8. HOMEPAGE CONTACT FORM SUBMISSION
+   8. HOMEPAGE CONTACT FORM VALIDATION & AJAX SUBMISSION
+   Powered by jQuery Validation Plugin
    ========================================================= */
 function initContactForm() {
-  const form = document.getElementById("contactForm");
-  const formStatus = document.getElementById("formStatus");
-  const submitBtn = document.getElementById("submitBtn");
+  function setupValidation($) {
+    const $form = $("#contactForm");
+    if (!$form.length) return;
 
-  if (!form) return;
+    // Disable native HTML5 form validation popups
+    $form.attr("novalidate", "novalidate");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    const $status = $("#formStatus");
+    const $submitBtn = $("#submitBtn");
+    const originalBtnHtml = $submitBtn.length
+      ? $submitBtn.html()
+      : 'Request a Demo <i class="ri-arrow-right-line"></i>';
 
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending... <i class="ri-loader-4-line"></i>';
+    let isSubmitting = false;
+
+    // Reset status display
+    function clearStatus() {
+      if ($status.length) {
+        $status
+          .removeClass("success error")
+          .text("")
+          .hide();
+      }
     }
 
-    if (formStatus) {
-      formStatus.style.display = "none";
-      formStatus.textContent = "";
-      formStatus.style.color = "var(--text-main, #f8fafc)";
-    }
-
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(form.action || "/contact", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "X-Requested-With": "XMLHttpRequest"
-        },
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (formStatus) {
-        formStatus.style.display = "block";
-        if (response.ok && data.success) {
-          formStatus.textContent = "Thank you! Your demo request has been received. Our team will contact you shortly.";
-          formStatus.style.color = "#34d399";
-          form.reset();
+    // Toggle loading state on submit button & status
+    function setLoading(isLoading) {
+      isSubmitting = isLoading;
+      if ($submitBtn.length) {
+        $submitBtn.prop("disabled", isLoading);
+        if (isLoading) {
+          $submitBtn.html(
+            '<i class="ri-loader-4-line ri-spin" style="margin-right: 8px;"></i> Sending...'
+          );
         } else {
-          formStatus.textContent = data.message || "Something went wrong. Please try again or email us directly at hello@vocabot.ai.";
-          formStatus.style.color = "#f87171";
+          $submitBtn.html(originalBtnHtml);
         }
       }
-    } catch (err) {
-      if (formStatus) {
-        formStatus.style.display = "block";
-        formStatus.textContent = "Unable to connect. Please email us at hello@vocabot.ai.";
-        formStatus.style.color = "#f87171";
-      }
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Request a Demo <i class="ri-arrow-right-line"></i>';
-      }
     }
-  });
+
+    // Clear field-specific error containers and invalid classes
+    function clearAllFieldErrors() {
+      $form.find(".error-message").empty().hide();
+      $form.find("input, textarea").removeClass("is-invalid error valid");
+    }
+
+    // Custom email regex method matching Contact form standards
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if ($.validator && !$.validator.methods.customEmail) {
+      $.validator.addMethod(
+        "customEmail",
+        function (value, element) {
+          return this.optional(element) || emailRegex.test(value);
+        },
+        "Please enter a valid email address."
+      );
+    }
+
+    // Initialize jQuery Validation
+    $form.validate({
+      errorElement: "span",
+      errorClass: "error-text",
+      validClass: "valid",
+      focusInvalid: true,
+
+      rules: {
+        name: {
+          required: true,
+          minlength: 2,
+          maxlength: 255,
+        },
+        email: {
+          required: true,
+          customEmail: true,
+          maxlength: 255,
+        },
+        company: {
+          maxlength: 255,
+        },
+        message: {
+          required: true,
+          minlength: 5,
+          maxlength: 5000,
+        },
+      },
+
+      messages: {
+        name: {
+          required: "Please enter your name.",
+          minlength: "Name must be at least 2 characters.",
+        },
+        email: {
+          required: "Please enter your work email address.",
+          customEmail: "Please enter a valid email address.",
+        },
+        message: {
+          required: "Please enter your message.",
+          minlength: "Message must be at least 5 characters.",
+        },
+      },
+
+      errorPlacement: function (error, element) {
+        const fieldName = element.attr("name") || element.attr("id");
+        const $container = $("#error-" + fieldName);
+        if ($container.length) {
+          $container.empty().append(error).show();
+        } else {
+          error.insertAfter(element);
+        }
+      },
+
+      highlight: function (element, errorClass, validClass) {
+        $(element)
+          .addClass("is-invalid error")
+          .removeClass(validClass);
+        const fieldName = $(element).attr("name") || $(element).attr("id");
+        const $container = $("#error-" + fieldName);
+        if ($container.length) {
+          $container.show();
+        }
+      },
+
+      unhighlight: function (element, errorClass, validClass) {
+        $(element)
+          .removeClass("is-invalid error")
+          .addClass(validClass);
+        const fieldName = $(element).attr("name") || $(element).attr("id");
+        const $container = $("#error-" + fieldName);
+        if ($container.length) {
+          $container.empty().hide();
+        }
+      },
+
+      submitHandler: function (form, event) {
+        if (event && event.preventDefault) {
+          event.preventDefault();
+        }
+
+        if (isSubmitting) {
+          return false;
+        }
+
+        clearStatus();
+        setLoading(true);
+
+        const csrfToken =
+          $('meta[name="csrf-token"]').attr("content") ||
+          $form.find('input[name="_token"]').val() ||
+          "";
+
+        const formData = new FormData(form);
+
+        $.ajax({
+          url: $form.attr("action") || "/contact",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: {
+            Accept: "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": csrfToken,
+          },
+          success: function (data) {
+            if (data && data.success !== false) {
+              $form[0].reset();
+              clearAllFieldErrors();
+
+              if ($status.length) {
+                $status
+                  .removeClass("error")
+                  .addClass("success")
+                  .text(
+                    data.message ||
+                      "Thank you! Your demo request has been received. Our team will contact you shortly."
+                  )
+                  .show();
+              }
+            } else {
+              if ($status.length) {
+                $status
+                  .removeClass("success")
+                  .addClass("error")
+                  .text(
+                    (data && data.message) ||
+                      "Something went wrong. Please try again or email us directly at hello@vocabot.ai."
+                  )
+                  .show();
+              }
+            }
+          },
+          error: function (xhr) {
+            let responseData = {};
+            try {
+              responseData =
+                xhr.responseJSON ||
+                (xhr.responseText ? JSON.parse(xhr.responseText) : {});
+            } catch (e) {
+              responseData = {};
+            }
+
+            if (xhr.status === 422) {
+              const errors = responseData.errors || {};
+              const fieldErrors = {};
+              $.each(errors, function (field, msgs) {
+                fieldErrors[field] = Array.isArray(msgs) ? msgs[0] : msgs;
+              });
+
+              const validator = $form.validate();
+              validator.showErrors(fieldErrors);
+
+              if ($status.length) {
+                $status
+                  .removeClass("success")
+                  .addClass("error")
+                  .text(
+                    responseData.message ||
+                      "Please correct the errors above and try again."
+                  )
+                  .show();
+              }
+            } else if (xhr.status === 419) {
+              if ($status.length) {
+                $status
+                  .removeClass("success")
+                  .addClass("error")
+                  .text(
+                    "Your session has expired. Please refresh the page and try again."
+                  )
+                  .show();
+              }
+            } else {
+              if ($status.length) {
+                $status
+                  .removeClass("success")
+                  .addClass("error")
+                  .text(
+                    responseData.message ||
+                      "Unable to connect. Please email us at hello@vocabot.ai."
+                  )
+                  .show();
+              }
+            }
+          },
+          complete: function () {
+            setLoading(false);
+          },
+        });
+
+        return false;
+      },
+    });
+
+    // Real-time clearing as user types to immediately clear field errors when valid
+    $form.on("input change", "input, textarea", function () {
+      if ($(this).hasClass("is-invalid") || $(this).hasClass("error")) {
+        $(this).valid();
+      }
+    });
+  }
+
+  // Ensure jQuery and jQuery Validation plugin are loaded before initializing
+  if (typeof jQuery !== "undefined" && typeof jQuery.fn.validate !== "undefined") {
+    setupValidation(jQuery);
+  } else {
+    window.addEventListener("load", function () {
+      if (typeof jQuery !== "undefined" && typeof jQuery.fn.validate !== "undefined") {
+        setupValidation(jQuery);
+      } else {
+        console.error("jQuery Validation Plugin is required for Vocabot contact form.");
+      }
+    });
+  }
 }

@@ -2310,41 +2310,43 @@ p{
 
 .form-row{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:13px;
 }
 
-.contact-form label{
-  display:grid;
+.contact-form .form-group{
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
 
-  gap:7px;
-
+.contact-form label,
+.contact-form .form-group label{
+  display:block;
+  margin-bottom:7px;
   color:#cfc7d7;
-
-  font-size:10px;
-  font-weight:700;
+  font-size:13px;
+  font-weight:600;
 }
 
 .contact-form input,
 .contact-form textarea,
 .contact-form select{
   width:100%;
-
   border:1px solid rgba(255,255,255,.08);
-
   outline:0;
-
   border-radius:13px;
-
   background:rgba(255,255,255,.035);
-
   color:#fff;
-
-  padding:13px;
-
+  padding:13px 14px;
+  font-family:inherit;
+  font-size:14px;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
   resize:vertical;
+}
+
+.contact-form textarea{
+  min-height:110px;
 }
 
 .contact-form select option{
@@ -2355,9 +2357,73 @@ p{
 .contact-form textarea:focus,
 .contact-form select:focus{
   border-color:rgba(192,132,252,.55);
-
   box-shadow:
     0 0 0 3px rgba(139,92,246,.08);
+}
+
+/* Invalid field highlight with red border and glow */
+.contact-form input.is-invalid,
+.contact-form textarea.is-invalid,
+.contact-form select.is-invalid,
+.contact-form input.error,
+.contact-form textarea.error,
+.contact-form select.error{
+  border-color:#ff8a8a !important;
+  background:rgba(255,138,138,.04);
+  box-shadow:0 0 0 3px rgba(255,138,138,.15) !important;
+}
+
+/* Error message positioning and styling consistent with Contact form */
+.contact-form .error-message,
+.contact-form .error-text,
+.contact-form label.error,
+.contact-form div.error-message{
+  color:#ff8a8a;
+  font-size:12px;
+  margin-top:6px;
+  line-height:1.4;
+  font-weight:500;
+  display:none;
+}
+
+.contact-form .error-message:not(:empty),
+.contact-form .error-text:not(:empty),
+.contact-form label.error:not(:empty),
+.contact-form div.error-message:not(:empty){
+  display:block;
+}
+
+.contact-form .form-status{
+  min-height:20px;
+  margin-top:16px;
+  text-align:center;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.5;
+  transition:all .25s ease;
+  display:none;
+}
+
+.contact-form .form-status:not(:empty){
+  display:block;
+}
+
+.contact-form .form-status.success{
+  display:block;
+  color:#4cd964;
+  background:rgba(76,217,100,.12);
+  border:1px solid rgba(76,217,100,.3);
+  padding:12px 18px;
+  border-radius:12px;
+}
+
+.contact-form .form-status.error{
+  display:block;
+  color:#ff8a8a;
+  background:rgba(255,138,138,.12);
+  border:1px solid rgba(255,138,138,.3);
+  padding:12px 18px;
+  border-radius:12px;
 }
 
 .form-note{

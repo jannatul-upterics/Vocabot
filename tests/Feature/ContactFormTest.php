@@ -29,6 +29,45 @@ class ContactFormTest extends TestCase
         $response->assertSee('js/contact.js', false);
     }
 
+    public function test_homepage_renders_with_contact_form_and_error_containers(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('id="contactForm"', false);
+        $response->assertSee('novalidate', false);
+        $response->assertSee('jquery.validate', false);
+        $response->assertSee('id="submitBtn"', false);
+        $response->assertDontSee('id="submitBtn" disabled', false);
+        $response->assertSee('id="error-name"', false);
+        $response->assertSee('id="error-email"', false);
+        $response->assertSee('id="error-company"', false);
+        $response->assertSee('id="error-message"', false);
+        $response->assertSee('id="formStatus"', false);
+        $response->assertSee('js/vocabot.js', false);
+    }
+
+    public function test_homepage_form_submits_successfully_with_name_field(): void
+    {
+        $response = $this->postJson(route('contact.submit'), [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@example.com',
+            'company' => 'Cyberdyne',
+            'interest' => 'Homepage Demo Request',
+            'message' => 'Please automate our customer care desk.',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('success', true);
+        $this->assertDatabaseHas('contact_submissions', [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@example.com',
+            'company' => 'Cyberdyne',
+            'subject' => 'Homepage Demo Request',
+            'message' => 'Please automate our customer care desk.',
+        ]);
+    }
+
     public function test_submits_successfully_with_valid_data(): void
     {
         $response = $this->postJson(route('contact.submit'), [

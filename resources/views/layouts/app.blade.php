@@ -98,6 +98,8 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+  <script>window.jQuery && window.jQuery.fn && window.jQuery.fn.validate || document.write('<script src="{{ asset('js/jquery.validate.min.js') }}"><\/script>')</script>
   @yield('scripts')
 </body>
 </html>

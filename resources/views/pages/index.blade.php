@@ -79,7 +79,7 @@
 @endsection
 
 @section('styles')
-  <link rel="stylesheet" href="{{ asset('css/vocabot.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/vocabot.css') }}?v={{ filemtime(public_path('css/vocabot.css')) }}">
 @endsection
 
 @section('content')
@@ -576,17 +576,31 @@
           <input type="hidden" name="interest" value="Homepage Demo Request">
 
           <div class="form-row">
-            <label>Full Name<input type="text" name="name" placeholder="Your name" required></label>
-            <label>Work Email<input type="email" name="email" placeholder="you@company.com" required></label>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+              <div class="error-message" id="error-name"></div>
+            </div>
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required>
+              <div class="error-message" id="error-email"></div>
+            </div>
           </div>
           <div class="form-row">
-            <label>Company<input type="text" name="company" placeholder="Company name"></label>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Company name">
+              <div class="error-message" id="error-company"></div>
+            </div>
           </div>
-          <label>What would you like to automate?
-            <textarea name="message" rows="4" placeholder="Tell us about your calls, bookings, or guest inquiry workflow..."></textarea>
-          </label>
+          <div class="form-group">
+            <label for="message">What would you like to automate?</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your calls, bookings, or guest inquiry workflow..." required></textarea>
+            <div class="error-message" id="error-message"></div>
+          </div>
           <button class="btn btn-primary btn-lg" type="submit" id="submitBtn">Request a Demo <i class="ri-arrow-right-line"></i></button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite" style="display:none; margin-top: 14px; font-weight: 500;"></p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
@@ -594,5 +608,5 @@
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('js/vocabot.js') }}"></script>
+  <script src="{{ asset('js/vocabot.js') }}?v={{ filemtime(public_path('js/vocabot.js')) }}"></script>
 @endsection
