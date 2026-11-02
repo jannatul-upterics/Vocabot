@@ -481,7 +481,7 @@
     </section>
 
     <!-- ================= ROI ================= -->
-    <section class="section roi-section">
+    <section class="section roi-section" id="roi">
       <div class="container roi-card glass-card reveal">
         <div class="roi-copy">
           <span class="section-label">BUSINESS IMPACT</span>
@@ -489,7 +489,7 @@
           <p>Use this simple estimator to explore the potential value of conversations that are currently missed. This is an estimate, not a guaranteed result.</p>
         </div>
 
-        <div class="roi-calculator">
+        <div class="roi-calculator" id="roi-calculator">
           <label>
             Average value per conversion
             <div class="input-wrap"><span>₹</span><input id="dealValue" type="number" min="0" value="1500"></div>
@@ -571,7 +571,7 @@
           </div>
         </div>
 
-        <form class="contact-form reveal" id="contactForm" method="POST" action="{{ route('contact.submit') }}">
+        <form class="contact-form reveal" id="contactForm" novalidate method="POST" action="{{ route('contact.submit') }}">
           @csrf
           <input type="hidden" name="interest" value="Homepage Demo Request">
 

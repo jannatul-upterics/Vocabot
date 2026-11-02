@@ -224,7 +224,7 @@
           <p>
             Eliminate busy tones and missed guest bookings. Vocabot delivers continuous 24/7 availability, lowering staff strain while delivering consistent, friendly caller service.
           </p>
-          <a href="{{ url('/contact') }}" class="benefit-btn">Calculate Your ROI</a>
+          <a href="{{ url('/#roi') }}" class="benefit-btn">Calculate Your ROI</a>
         </div>
 
         <div class="benefit-list">

@@ -2067,6 +2067,10 @@ p{
    ROI
    ========================================================= */
 
+.roi-section{
+  scroll-margin-top:90px;
+}
+
 .roi-card{
   padding:45px;
 
@@ -2708,6 +2712,10 @@ p{
 
   .integration-grid{
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .roi-section{
+    scroll-margin-top:76px;
   }
 
   .roi-card,

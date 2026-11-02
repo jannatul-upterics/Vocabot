@@ -79,6 +79,7 @@
 
   @yield('schema')
   @yield('styles')
+  <link rel="stylesheet" href="{{ asset('css/footer.css') }}?v={{ filemtime(public_path('css/footer.css')) }}">
 </head>
 
 <body>
@@ -95,6 +96,8 @@
   <!-- Shared Footer -->
   @include('layouts.footer')
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
   @yield('scripts')
 </body>
 </html>

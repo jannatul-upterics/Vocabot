@@ -122,13 +122,13 @@
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}" placeholder="Your first name" autocomplete="given-name" required>
-                        <div class="error-message" id="error-firstName"></div>
+                            <div class="error-message" id="error-firstName">@error('firstName') {{ $message }} @enderror</div>
                         </div>
 
                         <div class="form-group">
                             <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" name="lastName" value="{{ old('lastName') }}" placeholder="Your last name" autocomplete="family-name" required>
-                        <div class="error-message" id="error-lastName"></div>
+                            <div class="error-message" id="error-lastName">@error('lastName') {{ $message }} @enderror</div>
                         </div>
                     </div>
 
@@ -136,14 +136,14 @@
                     <div class="form-group">
                         <label for="email">Work Email</label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="you@company.com" autocomplete="email" required>
-                        <div class="error-message" id="error-email"></div>
+                        <div class="error-message" id="error-email">@error('email') {{ $message }} @enderror</div>
                     </div>
 
                     <!-- Company -->
                     <div class="form-group">
                         <label for="company">Company</label>
                         <input type="text" id="company" name="company" value="{{ old('company') }}" placeholder="Your company name" autocomplete="organization">
-                        <div class="error-message" id="error-company"></div>
+                        <div class="error-message" id="error-company">@error('company') {{ $message }} @enderror</div>
                     </div>
 
                     <!-- Interest -->

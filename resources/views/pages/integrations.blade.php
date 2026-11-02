@@ -344,7 +344,7 @@
     ========================== -->
     <section class="api-section" id="api">
 
-        <div class="api-card">
+        <div class="api-card reveal">
 
             <div class="api-content">
 
@@ -395,25 +395,40 @@
 
             <!-- Code Window -->
             <div class="code-window">
+                <div class="code-window-beam"></div>
                 <div class="code-header">
-                    <div class="window-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div class="code-header-left">
+                        <div class="window-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <span class="code-filename">
+                            <i class="ri-file-code-line"></i> webhook.json
+                        </span>
                     </div>
-                    <span>webhook.json</span>
+                    <div class="code-header-right">
+                        <div class="webhook-badge" id="webhookBadge">
+                            <span class="webhook-dot"></span>
+                            <span class="webhook-method">POST</span>
+                            <span class="webhook-status-text">200 OK</span>
+                        </div>
+                        <button type="button" class="webhook-replay-btn" id="webhookReplayBtn" title="Simulate Webhook Trigger" aria-label="Simulate Webhook Trigger">
+                            <i class="ri-refresh-line"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="code-body">
-<pre><code>{
-  <span class="code-key">"event"</span>: <span class="code-string">"call.completed"</span>,
-  <span class="code-key">"caller"</span>: {
-    <span class="code-key">"name"</span>: <span class="code-string">"John Smith"</span>,
-    <span class="code-key">"phone"</span>: <span class="code-string">"+1 555 000 0000"</span>
-  },
-  <span class="code-key">"intent"</span>: <span class="code-string">"appointment"</span>,
-  <span class="code-key">"status"</span>: <span class="code-string">"completed"</span>
-}</code></pre>
+<pre class="code-pre"><code><span class="code-line" data-line="1"><span class="line-num">1</span><span class="line-content">{</span></span>
+<span class="code-line" data-line="2"><span class="line-num">2</span><span class="line-content">  <span class="code-key">"event"</span>: <span class="code-string">"call.completed"</span>,</span></span>
+<span class="code-line" data-line="3"><span class="line-num">3</span><span class="line-content">  <span class="code-key">"caller"</span>: {</span></span>
+<span class="code-line" data-line="4"><span class="line-num">4</span><span class="line-content">    <span class="code-key">"name"</span>: <span class="code-string">"John Smith"</span>,</span></span>
+<span class="code-line" data-line="5"><span class="line-num">5</span><span class="line-content">    <span class="code-key">"phone"</span>: <span class="code-string">"+1 555 000 0000"</span></span></span>
+<span class="code-line" data-line="6"><span class="line-num">6</span><span class="line-content">  },</span></span>
+<span class="code-line" data-line="7"><span class="line-num">7</span><span class="line-content">  <span class="code-key">"intent"</span>: <span class="code-string">"appointment"</span>,</span></span>
+<span class="code-line" data-line="8" data-highlight="success"><span class="line-num">8</span><span class="line-content">  <span class="code-key">"status"</span>: <span class="code-string">"completed"</span></span></span>
+<span class="code-line" data-line="9"><span class="line-num">9</span><span class="line-content">}</span></span></code></pre>
                 </div>
             </div>
 

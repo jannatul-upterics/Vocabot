@@ -1064,6 +1064,12 @@ h1, h2, h3, h4 {
     filter: blur(150px);
     opacity: 0.12;
     pointer-events: none;
+    animation: cardGlowPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes cardGlowPulse {
+    0% { opacity: 0.12; transform: scale(1); }
+    100% { opacity: 0.22; transform: scale(1.15); }
 }
 
 .api-content {
@@ -1110,7 +1116,7 @@ h1, h2, h3, h4 {
 }
 
 /* =========================================================
-   CODE WINDOW
+   CODE WINDOW & ANIMATIONS
 ========================================================= */
 
 .code-window {
@@ -1121,49 +1127,329 @@ h1, h2, h3, h4 {
     box-shadow: var(--shadow);
     position: relative;
     z-index: 2;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.code-window:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 45px rgba(124, 58, 237, 0.22);
+    border-color: rgba(168, 85, 247, 0.32);
+}
+
+/* Glowing Top Data-Flow Beam */
+.code-window-beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a855f7, #38bdf8, transparent);
+    background-size: 200% 100%;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.code-window.active-transmission .code-window-beam {
+    opacity: 1;
+    animation: beamSweep 1.6s ease-in-out infinite;
+}
+
+@keyframes beamSweep {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
 }
 
 .code-header {
     height: 48px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 15px;
     padding: 0 16px;
     border-bottom: 1px solid var(--border-light);
     color: var(--muted-2);
     font-size: 11px;
+    background: rgba(13, 8, 28, 0.5);
+    user-select: none;
+}
+
+.code-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .window-dots {
     display: flex;
-    gap: 5px;
+    gap: 6px;
 }
 
 .window-dots span {
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: #403b49;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.window-dots .dot-red {
+    background: #ef4444;
+    opacity: 0.75;
+}
+
+.window-dots .dot-yellow {
+    background: #f59e0b;
+    opacity: 0.75;
+}
+
+.window-dots .dot-green {
+    background: #10b981;
+    opacity: 0.75;
+}
+
+.code-window:hover .window-dots span {
+    opacity: 1;
+}
+
+.code-filename {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-2);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.code-filename i {
+    color: var(--lavender);
+    font-size: 13px;
+}
+
+.code-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Webhook Status Indicator Badge */
+.webhook-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #34d399;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+}
+
+.webhook-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.webhook-badge.delivered .webhook-dot {
+    animation: webhookPulse 2s infinite;
+}
+
+.webhook-badge.receiving {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+.webhook-badge.receiving .webhook-dot {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+    animation: webhookPulseAmber 1s infinite;
+}
+
+@keyframes webhookPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes webhookPulseAmber {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+    70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.webhook-method {
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-2);
+}
+
+.webhook-replay-btn {
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-light);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.webhook-replay-btn:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.35);
+    color: var(--lavender);
+    transform: rotate(45deg);
+}
+
+.webhook-replay-btn:active {
+    transform: rotate(180deg) scale(0.95);
 }
 
 .code-body {
-    padding: 25px;
+    padding: 24px 22px;
     overflow-x: auto;
+    position: relative;
 }
 
 .code-body pre {
     margin: 0;
-}
-
-.code-body code {
-    color: var(--muted);
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     font-size: 12px;
     line-height: 1.9;
 }
 
+.code-body code {
+    color: var(--muted);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    display: block;
+}
+
+.code-line {
+    display: flex;
+    align-items: baseline;
+    padding: 1px 8px;
+    margin: 0 -8px;
+    border-radius: 4px;
+    position: relative;
+    transition: background 0.2s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.line-num {
+    display: inline-block;
+    width: 24px;
+    flex-shrink: 0;
+    color: var(--muted-2);
+    font-size: 11px;
+    user-select: none;
+    opacity: 0.55;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.line-content {
+    flex-grow: 1;
+    white-space: pre;
+}
+
+.code-line:hover {
+    background: rgba(168, 85, 247, 0.08);
+}
+
+.code-line:hover .line-num {
+    color: var(--lavender);
+    opacity: 1;
+}
+
+.code-line.active {
+    background: rgba(168, 85, 247, 0.14);
+}
+
+.code-line.active .line-num {
+    color: var(--lavender);
+    font-weight: 700;
+    opacity: 1;
+}
+
+.code-line.highlight-success {
+    background: rgba(16, 185, 129, 0.09);
+    box-shadow: inset 2px 0 0 #10b981;
+}
+
 .code-key { color: var(--lavender); }
 .code-string { color: #a5b4fc; }
+
+/* Typing Cursor */
+.code-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 13px;
+    margin-left: 2px;
+    vertical-align: -1px;
+    background: var(--magenta);
+    box-shadow: 0 0 6px var(--magenta);
+    border-radius: 1px;
+    animation: cursorBlink 0.75s steps(2, start) infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Progressive Enhancement: Initial line visibility controlled by JS */
+.code-window.js-animated .code-line {
+    opacity: 0;
+    transform: translateX(-6px);
+}
+
+.code-window.js-animated .code-line.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .code-window:hover {
+        transform: none;
+    }
+    .code-window.active-transmission .code-window-beam {
+        animation: none;
+        opacity: 0;
+    }
+    .code-window.js-animated .code-line {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    .code-cursor {
+        display: none !important;
+    }
+    .webhook-dot {
+        animation: none !important;
+    }
+    .api-card::after {
+        animation: none;
+    }
+}
 
 /* =========================================================
    WORKFLOW SECTION
@@ -1748,6 +2034,24 @@ section, header, main {
         grid-template-columns: 1fr;
         gap: 10px;
         margin: 22px 0 26px;
+    }
+
+    .code-header {
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    .code-filename {
+        font-size: 11px;
+    }
+
+    .webhook-badge {
+        font-size: 9px;
+        padding: 2px 7px;
+    }
+
+    .webhook-method {
+        display: none;
     }
 
     .code-body {

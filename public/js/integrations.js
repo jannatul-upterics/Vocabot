@@ -233,6 +233,196 @@ updateActiveNavigation();
         });
     });
 
+    /* =====================================================
+       CUSTOM CONNECTIONS — WEBHOOK ANIMATION CONTROLLER
+    ===================================================== */
+    const initCustomConnections = () => {
+        const apiSection = document.getElementById("api") || document.querySelector(".api-section");
+        const codeWindow = document.querySelector(".code-window");
+        const codeLines = document.querySelectorAll(".code-line");
+        const webhookBadge = document.getElementById("webhookBadge");
+        const webhookStatusText = webhookBadge ? webhookBadge.querySelector(".webhook-status-text") : null;
+        const replayBtn = document.getElementById("webhookReplayBtn");
+
+        if (!apiSection || !codeWindow || !codeLines.length) return;
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // If reduced motion is requested, show full code immediately and return
+        if (prefersReducedMotion) {
+            codeLines.forEach(line => line.classList.add("visible"));
+            if (webhookBadge) {
+                webhookBadge.classList.add("delivered");
+            }
+            return;
+        }
+
+        // Enable animated mode
+        codeWindow.classList.add("js-animated");
+
+        let isAnimating = false;
+        const cursorElem = document.createElement("span");
+        cursorElem.className = "code-cursor";
+        cursorElem.setAttribute("aria-hidden", "true");
+
+        let loopTimeout = null;
+        const timeouts = [];
+
+        const clearAllTimeouts = () => {
+            while (timeouts.length) {
+                clearTimeout(timeouts.pop());
+            }
+            clearTimeout(loopTimeout);
+        };
+
+        const resetCodeVisual = () => {
+            clearAllTimeouts();
+            codeLines.forEach(line => {
+                line.classList.remove("visible", "active", "highlight-success");
+            });
+            if (cursorElem.parentNode) {
+                cursorElem.parentNode.removeChild(cursorElem);
+            }
+        };
+
+        const playWebhookSequence = () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            resetCodeVisual();
+
+            // 1. Transmission state: beam glows, badge shows Receiving...
+            codeWindow.classList.add("active-transmission");
+            if (webhookBadge) {
+                webhookBadge.classList.remove("delivered");
+                webhookBadge.classList.add("receiving");
+                if (webhookStatusText) {
+                    webhookStatusText.textContent = "RECEIVING...";
+                }
+            }
+
+            const lineDelay = 150; // ms per line
+
+            codeLines.forEach((line, index) => {
+                const t = setTimeout(() => {
+                    // Remove active class from previous line
+                    if (index > 0) {
+                        codeLines[index - 1].classList.remove("active");
+                    }
+
+                    line.classList.add("visible", "active");
+
+                    // Move cursor to active line
+                    const lineContent = line.querySelector(".line-content") || line;
+                    lineContent.appendChild(cursorElem);
+
+                    // If line has success highlight
+                    if (line.dataset.highlight === "success") {
+                        line.classList.add("highlight-success");
+                    }
+
+                    // Last line completed
+                    if (index === codeLines.length - 1) {
+                        const finishTimer = setTimeout(() => {
+                            line.classList.remove("active");
+                            codeWindow.classList.remove("active-transmission");
+
+                            // Completed state
+                            if (webhookBadge) {
+                                webhookBadge.classList.remove("receiving");
+                                webhookBadge.classList.add("delivered");
+                                if (webhookStatusText) {
+                                    webhookStatusText.textContent = "200 OK";
+                                }
+                            }
+
+                            isAnimating = false;
+                            scheduleNextLoop();
+                        }, 400);
+                        timeouts.push(finishTimer);
+                    }
+                }, index * lineDelay + 300);
+
+                timeouts.push(t);
+            });
+        };
+
+        const scheduleNextLoop = () => {
+            clearTimeout(loopTimeout);
+            // Only auto-loop if mouse is not hovering over code window and section is visible
+            loopTimeout = setTimeout(() => {
+                if (!codeWindow.matches(":hover") && isElementInViewport(apiSection)) {
+                    playWebhookSequence();
+                } else {
+                    scheduleNextLoop();
+                }
+            }, 9000);
+        };
+
+        const isElementInViewport = el => {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+        };
+
+        // Pause loop on mouseenter, resume on mouseleave
+        codeWindow.addEventListener("mouseenter", () => {
+            clearTimeout(loopTimeout);
+        });
+
+        codeWindow.addEventListener("mouseleave", () => {
+            if (!isAnimating) {
+                scheduleNextLoop();
+            }
+        });
+
+        // Replay button listener
+        if (replayBtn) {
+            replayBtn.addEventListener("click", () => {
+                clearAllTimeouts();
+                isAnimating = false;
+                playWebhookSequence();
+            });
+        }
+
+        // Scroll observer for custom connections section
+        let hasTriggered = false;
+
+        if ("IntersectionObserver" in window) {
+            const sectionObserver = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !hasTriggered) {
+                            hasTriggered = true;
+                            playWebhookSequence();
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+            sectionObserver.observe(apiSection);
+        } else {
+            playWebhookSequence();
+        }
+
+        // Also check if section is already in viewport on page load (e.g. #api in URL)
+        const checkInitialInView = () => {
+            if (hasTriggered) return;
+            if (isElementInViewport(apiSection)) {
+                hasTriggered = true;
+                playWebhookSequence();
+            }
+        };
+
+        checkInitialInView();
+        window.addEventListener("load", checkInitialInView);
+    };
+
+    initCustomConnections();
+
     /* Initialize filter check on load */
     filterIntegrations();
 });

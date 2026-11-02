@@ -15,6 +15,8 @@ class ContactFormTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('id="contactForm"', false);
+        $response->assertSee('novalidate', false);
+        $response->assertSee('jquery', false);
         $response->assertSee('id="submitBtn"', false);
         $response->assertDontSee('id="submitBtn" disabled', false);
         $response->assertSee('id="error-firstName"', false);

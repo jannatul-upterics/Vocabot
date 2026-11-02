@@ -14,29 +14,37 @@
       </div>
     </div>
 
-    <div class="footer-col">
-      <h3>Product</h3>
-      <a href="{{ url('/product') }}">Overview</a>
-      <a href="{{ url('/how-it-works') }}">How It Works</a>
-      <a href="{{ url('/#demo') }}">AI Voice Demo</a>
-      <a href="{{ url('/integrations') }}">Integrations</a>
-    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-col">
+        <h3>Product</h3>
+        <div class="footer-links">
+          <a href="{{ url('/product') }}">Overview</a>
+          <a href="{{ url('/how-it-works') }}">How It Works</a>
+          <a href="{{ url('/#demo') }}">AI Voice Demo</a>
+          <a href="{{ url('/integrations') }}">Integrations</a>
+        </div>
+      </div>
 
-    <div class="footer-col">
-      <h3>Solutions</h3>
-      <a href="{{ url('/solutions') }}">Restaurant Calls</a>
-      <a href="{{ url('/solutions#use-cases') }}">Table Reservations</a>
-      <a href="{{ url('/solutions#workflow') }}">Voice Workflows</a>
-      <a href="{{ url('/solutions#benefits') }}">Impact & ROI</a>
-    </div>
+      <div class="footer-col">
+        <h3>Solutions</h3>
+        <div class="footer-links">
+          <a href="{{ url('/solutions') }}">Restaurant Calls</a>
+          <a href="{{ url('/solutions#use-cases') }}">Table Reservations</a>
+          <a href="{{ url('/solutions#workflow') }}">Voice Workflows</a>
+          <a href="{{ url('/solutions#benefits') }}">Impact & ROI</a>
+        </div>
+      </div>
 
-    <div class="footer-col">
-      <h3>Company</h3>
-      <a href="{{ url('/#faq') }}">FAQ</a>
-      <a href="{{ url('/contact') }}">Contact</a>
-      <a href="{{ url('/policy#privacy') }}">Privacy Policy</a>
-      <a href="{{ url('/policy#terms') }}">Terms of Service</a>
-    </div>
+      <div class="footer-col footer-col-company">
+        <h3>Company</h3>
+        <div class="footer-links">
+          <a href="{{ url('/#faq') }}">FAQ</a>
+          <a href="{{ url('/contact') }}">Contact</a>
+          <a href="{{ url('/policy#privacy') }}">Privacy Policy</a>
+          <a href="{{ url('/policy#terms') }}">Terms of Service</a>
+        </div>
+      </div>
+    </nav>
   </div>
 
   <div class="container footer-bottom">
@@ -44,4 +52,3 @@
     <span>AI voice automation for modern businesses.</span>
   </div>
 </footer>
-
