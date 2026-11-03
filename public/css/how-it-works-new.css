@@ -908,6 +908,7 @@ button {
   background: rgba(255, 255, 255, 0.035);
   color: var(--muted);
   font-size: 11px;
+  transition: all 0.35s ease;
 }
 
 .flow-node span {
@@ -919,6 +920,7 @@ button {
   border-color: var(--border);
   background: rgba(139, 92, 246, 0.2);
   color: #fff;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
 }
 
 .flow-arrow {
@@ -926,16 +928,21 @@ button {
 }
 
 .phone-card {
-  max-width: 430px;
+  max-width: 440px;
+  width: 100%;
   margin-left: auto;
-  padding: 22px;
-  border-radius: 25px;
-  background: linear-gradient(145deg, rgba(39, 18, 89, 0.58), rgba(10, 5, 27, 0.72));
+  padding: 22px 20px 20px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(39, 18, 89, 0.62), rgba(10, 5, 27, 0.78));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   transform: rotate(1deg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .phone-top {
@@ -945,6 +952,20 @@ button {
   font-size: 10px;
   letter-spacing: 1px;
   font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-status {
+  display: inline-flex;
+  align-items: center;
+}
+
+.phone-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .phone-dot {
@@ -955,110 +976,336 @@ button {
   border-radius: 50%;
   margin-right: 7px;
   box-shadow: 0 0 10px rgba(192, 132, 252, 0.8);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(192, 132, 252, 0.85);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+    box-shadow: 0 0 4px rgba(192, 132, 252, 0.3);
+  }
 }
 
 .call-time {
-  float: right;
   color: var(--muted-2);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
 }
 
-.caller,
-.ai-reply {
-  display: flex;
-  gap: 12px;
-  padding: 20px 0;
+.phone-replay-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+  line-height: 1;
 }
 
+.phone-replay-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: var(--lavender);
+  transform: rotate(45deg);
+}
+
+.phone-replay-btn:active {
+  transform: rotate(180deg) scale(0.92);
+}
+
+/* =========================================================
+   LIVE CONVERSATION CHAT UI
+   ========================================================= */
+
+/* Avatar icon */
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-  border-radius: 11px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0;
+  user-select: none;
 }
 
 .ai-avatar {
   background: var(--gradient);
-  color: #fff;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.45);
 }
 
-.caller small,
-.ai-reply small {
-  color: var(--muted-2);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.caller p,
-.ai-reply p {
-  font-size: 12px;
-  color: var(--text-2);
-  margin-top: 3px;
-  line-height: 1.6;
-}
-
-.ai-reply {
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid var(--border);
-  padding: 14px;
-  border-radius: 13px;
-}
-
-.thinking {
+/* Phone body: scrollable conversation area */
+.phone-body {
+  flex: 1 1 auto;
+  height: 380px;
+  max-height: 380px;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 0;
-  color: var(--muted-2);
-  font-size: 10px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 6px 12px 2px;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
 }
 
-.thinking span {
+/* Custom scrollbar */
+.phone-body::-webkit-scrollbar {
   width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--lavender);
-  animation: bounce 1s infinite;
+}
+.phone-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+.phone-body::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.35);
+  border-radius: 4px;
+}
+.phone-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.65);
 }
 
-.thinking span:nth-child(2) { animation-delay: 0.15s; }
-.thinking span:nth-child(3) { animation-delay: 0.3s; }
+/* Shared message row base */
+.convo-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 88%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.convo-msg small {
+  display: block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.convo-msg p {
+  font-size: 12.5px;
+  margin: 0;
+  line-height: 1.55;
+  font-weight: 400;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Customer message: left-aligned */
+.convo-customer {
+  align-self: flex-start;
+  margin-right: auto;
+  flex-direction: row;
+}
+
+.convo-customer .avatar {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #d1c7e8;
+}
+
+.convo-customer .convo-bubble,
+.convo-customer > div:not(.avatar) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.035) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px 16px 16px 16px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  max-width: calc(100% - 42px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.convo-customer small {
+  color: var(--muted);
+}
+
+.convo-customer p {
+  color: #f1edfa;
+}
+
+/* Vocabot AI message: right-aligned */
+.convo-ai {
+  align-self: flex-end;
+  margin-left: auto;
+  flex-direction: row-reverse;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.convo-ai .convo-bubble,
+.convo-ai > div:not(.avatar) {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.38) 0%, rgba(168, 85, 247, 0.22) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 16px 4px 16px 16px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  max-width: calc(100% - 42px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.convo-ai small {
+  color: var(--lavender);
+}
+
+.convo-ai p {
+  color: #ffffff;
+}
+
+/* Thinking / processing indicator inside convo flow */
+.convo-msg.thinking {
+  align-self: flex-end;
+  margin-left: auto;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 10px;
+  max-width: 88%;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.thinking-bubble,
+.convo-msg.thinking > div:not(.avatar) {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  border-radius: 14px 4px 14px 14px;
+  background: rgba(139, 92, 246, 0.16);
+  border: 1px dashed rgba(168, 85, 247, 0.38);
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.12);
+  line-height: 1;
+}
+
+/* Three dots container: strictly horizontal flex row */
+.thinking-dots {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  transform: none !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Exactly three small dots in a single horizontal row */
+.thinking-dots > span,
+.thinking-dots .dot {
+  display: inline-block !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: var(--lavender) !important;
+  box-shadow: 0 0 6px rgba(192, 132, 252, 0.75) !important;
+  animation: chatgptBounce 1.3s infinite ease-in-out both !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.thinking-dots > span:nth-child(1),
+.thinking-dots .dot:nth-child(1) {
+  animation-delay: 0s !important;
+}
+
+.thinking-dots > span:nth-child(2),
+.thinking-dots .dot:nth-child(2) {
+  animation-delay: 0.18s !important;
+}
+
+.thinking-dots > span:nth-child(3),
+.thinking-dots .dot:nth-child(3) {
+  animation-delay: 0.36s !important;
+}
 
 .thinking b {
-  margin-left: 7px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.3px;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
 }
 
-@keyframes bounce {
-  50% { transform: translateY(-4px); }
+/* ChatGPT-style wave pulse / bounce */
+@keyframes chatgptBounce {
+  0%, 80%, 100% {
+    transform: translateY(0) scale(0.85);
+    opacity: 0.45;
+  }
+  40% {
+    transform: translateY(-4px) scale(1.15);
+    opacity: 1;
+  }
 }
 
+/* Workflow action card (fixed footer of phone card) */
 .call-action {
+  flex: 0 0 auto;
+  margin-top: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .call-action small {
   display: block;
-  color: var(--muted-2);
-  font-size: 8px;
-  letter-spacing: 1px;
+  color: var(--lavender);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 
 .call-action strong {
-  font-size: 12px;
+  font-size: 12.5px;
   color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .check {
@@ -1069,6 +1316,81 @@ button {
   border-radius: 50%;
   background: rgba(139, 92, 246, 0.16);
   color: var(--lavender);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   LIVE CONVERSATION SEQUENTIAL ANIMATION
+   ========================================================= */
+
+/* js-animated: unrevealed messages take zero space */
+.phone-card.js-animated .convo-msg {
+  display: none;
+  opacity: 0;
+}
+
+/* Revealed message: appears cleanly with smooth transition */
+.phone-card.js-animated .convo-msg.is-visible {
+  display: flex;
+  animation: convoBubbleEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes convoBubbleEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Workflow badge initial state */
+.phone-card.js-animated .call-action {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-card.js-animated .call-action.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Check circle */
+.phone-card.js-animated .check {
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.35s ease,
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.35),
+              background 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.phone-card.js-animated .check.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  background: rgba(139, 92, 246, 0.28);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
+}
+
+/* Reduced-motion: show everything immediately */
+@media (prefers-reduced-motion: reduce) {
+  .phone-dot {
+    animation: none;
+  }
+  .phone-card.js-animated .convo-msg,
+  .phone-card.js-animated .call-action,
+  .phone-card.js-animated .check {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* =========================================================
@@ -1702,6 +2024,40 @@ button {
 
   .phone-card {
     transform: none;
+    max-width: 100%;
+    padding: 18px 14px 16px;
+    border-radius: 22px;
+  }
+
+  .phone-body {
+    height: 340px;
+    max-height: 340px;
+    gap: 10px;
+  }
+
+  .convo-msg {
+    max-width: 92%;
+    gap: 8px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+    border-radius: 8px;
+  }
+
+  .convo-customer .convo-bubble,
+  .convo-customer > div:not(.avatar),
+  .convo-ai .convo-bubble,
+  .convo-ai > div:not(.avatar) {
+    padding: 9px 12px;
+    max-width: calc(100% - 36px);
+  }
+
+  .convo-customer p,
+  .convo-ai p {
+    font-size: 12px;
   }
 
   .benefit-grid {

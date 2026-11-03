@@ -201,42 +201,134 @@
         </div>
       </div>
 
-      <div class="phone-card">
+      <div class="phone-card" id="phoneCard">
         <div class="phone-top">
-          <span class="phone-dot"></span>
-          LIVE CALL
-          <span class="call-time">01:24</span>
-        </div>
-
-        <div class="caller">
-          <div class="avatar">C</div>
-          <div>
-            <small>Customer</small>
-            <p>I want to move my appointment to Friday.</p>
+          <div class="phone-status">
+            <span class="phone-dot"></span>
+            LIVE CALL
+          </div>
+          <div class="phone-actions">
+            <span class="call-time" id="callTime">--:-- --</span>
+            <button type="button" class="phone-replay-btn" id="convoReplayBtn" title="Replay conversation" aria-label="Replay conversation">
+              <i class="ri-refresh-line"></i>
+            </button>
           </div>
         </div>
 
-        <div class="ai-reply">
-          <div class="avatar ai-avatar">V</div>
-          <div>
-            <small>Vocabot</small>
-            <p>Of course. I can help with that. What time on Friday works best for you?</p>
+        {{-- Phone card scroll body --}}
+        <div class="phone-body" id="phoneBody">
+
+          {{-- Message 1: Customer request --}}
+          <div class="convo-msg convo-customer" id="msg1">
+            <div class="avatar">C</div>
+            <div class="convo-bubble">
+              <small>Customer</small>
+              <p>I want to move my appointment to Friday.</p>
+            </div>
           </div>
+
+          {{-- Message 2: Vocabot initial response --}}
+          <div class="convo-msg convo-ai" id="msg2">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble">
+              <small>Vocabot</small>
+              <p>Of course. I can help with that. What time on Friday works best for you?</p>
+            </div>
+          </div>
+
+          {{-- Message 3: Customer preferred time --}}
+          <div class="convo-msg convo-customer" id="msg3">
+            <div class="avatar">C</div>
+            <div class="convo-bubble">
+              <small>Customer</small>
+              <p>Around 3 PM would be ideal.</p>
+            </div>
+          </div>
+
+          {{-- Thinking indicator 1: checking availability --}}
+          <div class="thinking convo-msg" id="thinking1">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble thinking-bubble">
+              <span class="thinking-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+              <b>Vocabot is processing</b>
+            </div>
+          </div>
+
+          {{-- Message 4: Vocabot checking availability --}}
+          <div class="convo-msg convo-ai" id="msg4">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble">
+              <small>Vocabot</small>
+              <p id="msg4Text">Certainly. Let me check the availability for Friday at 3:00 PM.</p>
+            </div>
+          </div>
+
+          {{-- Message 5: Customer acknowledges --}}
+          <div class="convo-msg convo-customer" id="msg5">
+            <div class="avatar">C</div>
+            <div class="convo-bubble">
+              <small>Customer</small>
+              <p>Sure, please check.</p>
+            </div>
+          </div>
+
+          {{-- Thinking indicator 2: availability result --}}
+          <div class="thinking convo-msg" id="thinking2">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble thinking-bubble">
+              <span class="thinking-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+              <b>Checking availability</b>
+            </div>
+          </div>
+
+          {{-- Message 6: Vocabot found slot, asks confirmation --}}
+          <div class="convo-msg convo-ai" id="msg6">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble">
+              <small>Vocabot</small>
+              <p id="msg6Text">I found an available slot at 3:00 PM on Friday. Would you like me to reschedule your appointment to that time?</p>
+            </div>
+          </div>
+
+          {{-- Message 7: Customer confirms --}}
+          <div class="convo-msg convo-customer" id="msg7">
+            <div class="avatar">C</div>
+            <div class="convo-bubble">
+              <small>Customer</small>
+              <p>Yes, please go ahead.</p>
+            </div>
+          </div>
+
+          {{-- Thinking indicator 3: rescheduling --}}
+          <div class="thinking convo-msg" id="thinking3">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble thinking-bubble">
+              <span class="thinking-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+              <b>Rescheduling appointment</b>
+            </div>
+          </div>
+
+          {{-- Message 8: Vocabot confirms success --}}
+          <div class="convo-msg convo-ai" id="msg8">
+            <div class="avatar ai-avatar">V</div>
+            <div class="convo-bubble">
+              <small>Vocabot</small>
+              <p id="msg8Text">Your appointment has been successfully rescheduled to Friday at 3:00 PM. Is there anything else I can help you with?</p>
+            </div>
+          </div>
+
+        </div>{{-- end .phone-body --}}
+
+        {{-- Workflow status badge --}}
+        <div class="call-action" id="callActionMsg">
+          <div>
+            <small id="workflowLabel">WORKFLOW STATUS</small>
+            <strong id="workflowStatus">Request received</strong>
+          </div>
+          <span class="check" id="actionCheck" aria-hidden="true">✓</span>
         </div>
 
-        <div class="thinking">
-          <span></span><span></span><span></span>
-          <b>Vocabot is processing</b>
-        </div>
-
-        <div class="call-action">
-          <div>
-            <small>ACTION TRIGGERED</small>
-            <strong>Reservation workflow</strong>
-          </div>
-          <span class="check">✓</span>
-        </div>
-      </div>
+      </div>{{-- end .phone-card --}}
 
     </div>
   </section>
