@@ -39,106 +39,82 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ================= MOBILE MENU ================= */
 
     const closeMobileMenu = () => {
-
         if (!mobileMenu || !menuToggle) return;
 
         mobileMenu.classList.remove("open");
         menuToggle.classList.remove("active");
 
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Open menu"
-        );
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
 
         document.body.classList.remove("menu-open");
     };
 
-
     const openMobileMenu = () => {
-
         if (!mobileMenu || !menuToggle) return;
 
         mobileMenu.classList.add("open");
         menuToggle.classList.add("active");
 
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Close menu"
-        );
+        menuToggle.setAttribute("aria-expanded", "true");
+        menuToggle.setAttribute("aria-label", "Close menu");
 
         document.body.classList.add("menu-open");
     };
 
-
     if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
 
-        menuToggle.addEventListener("click", () => {
-
-            const isOpen =
-                mobileMenu.classList.contains("open");
-
+            const isOpen = mobileMenu.classList.contains("open");
             if (isOpen) {
                 closeMobileMenu();
             } else {
                 openMobileMenu();
             }
-
         });
-
 
         /* Close menu after clicking a link */
-
-        const mobileLinks =
-            mobileMenu.querySelectorAll("a");
-
+        const mobileLinks = mobileMenu.querySelectorAll("a");
         mobileLinks.forEach((link) => {
-
-            link.addEventListener(
-                "click",
-                closeMobileMenu
-            );
-
+            link.addEventListener("click", closeMobileMenu);
         });
 
+        /* Close when clicking outside */
+        document.addEventListener("click", (event) => {
+            if (!mobileMenu.classList.contains("open")) {
+                return;
+            }
+
+            const clickedInsideMenu = mobileMenu.contains(event.target);
+            const clickedToggle = menuToggle.contains(event.target);
+
+            if (!clickedInsideMenu && !clickedToggle) {
+                closeMobileMenu();
+            }
+        });
 
         /* Close menu with Escape */
-
-        document.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (event.key === "Escape") {
-                    closeMobileMenu();
-                }
-
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && mobileMenu.classList.contains("open")) {
+                closeMobileMenu();
+                menuToggle.focus();
             }
-        );
-
+        });
 
         /* Close menu when resizing to desktop */
-
         window.addEventListener(
             "resize",
             () => {
-
                 if (
-                    window.innerWidth > 900 &&
+                    window.innerWidth > 950 &&
                     mobileMenu.classList.contains("open")
                 ) {
                     closeMobileMenu();
                 }
-
-            }
+            },
+            { passive: true }
         );
     }
 

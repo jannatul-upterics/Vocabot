@@ -587,12 +587,10 @@
               <div class="error-message" id="error-email"></div>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="company">Company</label>
-              <input type="text" id="company" name="company" placeholder="Company name">
-              <div class="error-message" id="error-company"></div>
-            </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Company name">
+            <div class="error-message" id="error-company"></div>
           </div>
           <div class="form-group">
             <label for="message">What would you like to automate?</label>

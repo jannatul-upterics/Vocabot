@@ -589,46 +589,8 @@ p{
 .mobile-menu a.active::after {
   width: 100%;
 }
-  display:none;
 
-  position:absolute;
 
-  top:76px;
-  left:16px;
-  right:16px;
-
-  width:auto;
-
-  padding:16px;
-
-  flex-direction:column;
-  gap:4px;
-
-  background:rgba(12,5,28,.96);
-
-  border:1px solid var(--border);
-  border-radius:14px;
-
-  box-shadow:var(--shadow);
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-
-  transform:translateY(-10px);
-
-  transition:
-    opacity .25s ease,
-    visibility .25s ease,
-    transform .25s ease;
-
-  z-index:10001;
-
-  font-family:"Plus Jakarta Sans",sans-serif;
-}
 
 
 /* =========================================================
@@ -2347,6 +2309,7 @@ p{
 
 .contact-form textarea{
   min-height:110px;
+  max-height:120px;
 }
 
 .contact-form select option{

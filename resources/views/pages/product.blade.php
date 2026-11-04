@@ -495,7 +495,7 @@
                 <div class="eyebrow">GET STARTED</div>
                 <h2>Your next call could already be <span>automated.</span></h2>
                 <p>See how a Vocabot AI voice workflow could fit your business.</p>
-                <a class="btn" href="{{ url('/contact') }}">
+                <a class="btn btn-primary btn-lg" href="{{ url('/contact') }}">
                     Book a Free Demo <b>→</b>
                 </a>
             </div>

@@ -1767,6 +1767,36 @@ section, header, main {
         display: flex !important;
     }
 
+    .hero {
+        min-height: auto;
+        padding: 40px 0 50px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .hero-copy {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 7vw, 56px);
+        line-height: 1.12;
+    }
+
+    .hero-lead {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
     .hero-section {
         grid-template-columns: 1fr;
         gap: 55px;
@@ -1783,8 +1813,9 @@ section, header, main {
     }
 
     .integration-network {
-        width: min(520px, 92vw);
-        height: min(520px, 92vw);
+        width: min(460px, 88vw);
+        height: min(460px, 88vw);
+        margin: 0 auto;
     }
 
     .stack-strip {
@@ -1865,9 +1896,16 @@ section, header, main {
         height: 42px;
     }
 
-    .hero-section {
-        gap: 45px;
-        padding: 60px 0 55px;
+    .hero {
+        padding: 30px 0 40px;
+    }
+
+    .hero-grid {
+        gap: 38px;
+    }
+
+    .hero h1 {
+        font-size: clamp(30px, 8vw, 44px);
     }
 
     .hero-badge {
@@ -1875,6 +1913,25 @@ section, header, main {
         font-size: 11px;
         letter-spacing: 0.1em;
         padding: 7px 10px;
+        margin-bottom: 18px;
+    }
+
+    .hero-lead {
+        margin-top: 18px;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .hero-section {
+        gap: 45px;
+        padding: 60px 0 55px;
     }
 
     .hero-content > p {
@@ -1883,7 +1940,6 @@ section, header, main {
         line-height: 1.65;
     }
 
-    .hero-buttons,
     .cta-buttons {
         flex-direction: column;
         align-items: stretch;
@@ -1896,8 +1952,8 @@ section, header, main {
     }
 
     .integration-network {
-        width: min(390px, 92vw);
-        height: min(390px, 92vw);
+        width: min(340px, 88vw);
+        height: min(340px, 88vw);
     }
 
     .orbit-1 { width: 76%; height: 76%; }
@@ -2131,9 +2187,17 @@ section, header, main {
         height: 36px;
     }
 
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero-lead {
+        font-size: 13px;
+    }
+
     .integration-network {
-        width: min(330px, 94vw);
-        height: min(330px, 94vw);
+        width: min(290px, 92vw);
+        height: min(290px, 92vw);
     }
 
     .network-node {

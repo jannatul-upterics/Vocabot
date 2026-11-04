@@ -27,7 +27,7 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/policy.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/policy.css') }}?v={{ filemtime(public_path('css/policy.css')) }}">
 @endsection
 
 @section('content')
@@ -391,5 +391,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/policy.js') }}"></script>
+    <script src="{{ asset('js/policy.js') }}?v={{ filemtime(public_path('js/policy.js')) }}"></script>
 @endsection
