@@ -501,6 +501,18 @@ function initContactForm() {
       );
     }
 
+    // Custom US phone number validation
+    const usPhoneRegex = /^(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
+    if ($.validator && !$.validator.methods.usPhone) {
+      $.validator.addMethod(
+        "usPhone",
+        function (value, element) {
+          return this.optional(element) || usPhoneRegex.test(value.trim());
+        },
+        "Please enter a valid US phone number (e.g. +1 555 123 4567)."
+      );
+    }
+
     // Initialize jQuery Validation
     $form.validate({
       errorElement: "span",
@@ -519,8 +531,8 @@ function initContactForm() {
           customEmail: true,
           maxlength: 255,
         },
-        company: {
-          maxlength: 255,
+        phone: {
+          usPhone: true,
         },
         message: {
           required: true,
@@ -537,6 +549,9 @@ function initContactForm() {
         email: {
           required: "Please enter your work email address.",
           customEmail: "Please enter a valid email address.",
+        },
+        phone: {
+          usPhone: "Please enter a valid US phone number (e.g. +1 555 123 4567).",
         },
         message: {
           required: "Please enter your message.",

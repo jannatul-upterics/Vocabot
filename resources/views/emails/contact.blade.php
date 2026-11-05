@@ -47,12 +47,6 @@
             </div>
             @endif
 
-            @if(!empty($company))
-            <div class="field-group">
-                <span class="field-label">Company</span>
-                <div class="field-value">{{ $company }}</div>
-            </div>
-            @endif
 
             @if(!empty($subjectText))
             <div class="field-group">

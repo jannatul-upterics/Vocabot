@@ -577,20 +577,20 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Full Name</label>
+              <label for="name">Name</label>
               <input type="text" id="name" name="name" placeholder="Your name" required>
               <div class="error-message" id="error-name"></div>
             </div>
             <div class="form-group">
-              <label for="email">Work Email</label>
-              <input type="email" id="email" name="email" placeholder="you@company.com" required>
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" placeholder="you@gmail.com" required>
               <div class="error-message" id="error-email"></div>
             </div>
           </div>
           <div class="form-group">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" placeholder="Company name">
-            <div class="error-message" id="error-company"></div>
+            <label for="phone">Contact Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" autocomplete="tel">
+            <div class="error-message" id="error-phone"></div>
           </div>
           <div class="form-group">
             <label for="message">What would you like to automate?</label>

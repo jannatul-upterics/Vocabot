@@ -22,7 +22,7 @@ class ContactFormTest extends TestCase
         $response->assertSee('id="error-firstName"', false);
         $response->assertSee('id="error-lastName"', false);
         $response->assertSee('id="error-email"', false);
-        $response->assertSee('id="error-company"', false);
+        $response->assertSee('id="error-phone"', false);
         $response->assertSee('id="error-interest"', false);
         $response->assertSee('id="error-message"', false);
         $response->assertSee('id="formStatus"', false);
@@ -41,7 +41,7 @@ class ContactFormTest extends TestCase
         $response->assertDontSee('id="submitBtn" disabled', false);
         $response->assertSee('id="error-name"', false);
         $response->assertSee('id="error-email"', false);
-        $response->assertSee('id="error-company"', false);
+        $response->assertSee('id="error-phone"', false);
         $response->assertSee('id="error-message"', false);
         $response->assertSee('id="formStatus"', false);
         $response->assertSee('js/vocabot.js', false);
@@ -52,7 +52,7 @@ class ContactFormTest extends TestCase
         $response = $this->postJson(route('contact.submit'), [
             'name' => 'Sarah Connor',
             'email' => 'sarah@example.com',
-            'company' => 'Cyberdyne',
+            'phone' => '+1 555 123 4567',
             'interest' => 'Homepage Demo Request',
             'message' => 'Please automate our customer care desk.',
         ]);
@@ -62,7 +62,7 @@ class ContactFormTest extends TestCase
         $this->assertDatabaseHas('contact_submissions', [
             'name' => 'Sarah Connor',
             'email' => 'sarah@example.com',
-            'company' => 'Cyberdyne',
+            'phone' => '+1 555 123 4567',
             'subject' => 'Homepage Demo Request',
             'message' => 'Please automate our customer care desk.',
         ]);
@@ -74,9 +74,8 @@ class ContactFormTest extends TestCase
             'firstName' => 'John',
             'lastName' => 'Doe',
             'email' => 'john@example.com',
-            'company' => 'Acme Corp',
+            'phone' => '(555) 123-4567',
             'interest' => 'Book a Demo',
-            'phone' => '+1234567890',
             'message' => 'I would like a demo.',
         ]);
 

@@ -21,8 +21,6 @@ class ContactFormMail extends Mailable
 
     public ?string $customerPhone;
 
-    public ?string $company;
-
     public ?string $subjectText;
 
     public ?string $messageText;
@@ -49,11 +47,6 @@ class ContactFormMail extends Mailable
             $data['phone'] ?? $data['Phone'] ?? $data['phoneNumber'] ?? $data['Phone Number'] ?? $data['mobile'] ?? ''
         );
         $this->customerPhone = (! empty($phoneCandidate) && strtolower($phoneCandidate) !== 'not provided') ? $phoneCandidate : null;
-
-        $companyCandidate = trim(
-            $data['company'] ?? $data['Company'] ?? ''
-        );
-        $this->company = (! empty($companyCandidate) && strtolower($companyCandidate) !== 'not provided') ? $companyCandidate : null;
 
         $subjectCandidate = trim(
             $data['subject'] ?? $data['Subject'] ?? $data['interest'] ?? $data['Interested In'] ?? $data['industry'] ?? $data['Industry'] ?? ''
@@ -88,7 +81,6 @@ class ContactFormMail extends Mailable
                 'customerName' => $this->customerName,
                 'customerEmail' => $this->customerEmail,
                 'customerPhone' => $this->customerPhone,
-                'company' => $this->company,
                 'subjectText' => $this->subjectText,
                 'messageText' => $this->messageText,
                 'submittedAt' => $this->submittedAt,

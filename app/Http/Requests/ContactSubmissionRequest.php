@@ -37,9 +37,6 @@ class ContactSubmissionRequest extends FormRequest
             ?? $this->input('Full Name')
             ?? $this->input('full_name');
 
-        $rawCompany = $this->input('company')
-            ?? $this->input('Company');
-
         $rawInterest = $this->input('interest')
             ?? $this->input('Interested In')
             ?? $this->input('subject')
@@ -52,10 +49,6 @@ class ContactSubmissionRequest extends FormRequest
 
         $rawMessage = $this->input('message')
             ?? $this->input('Message');
-
-        if ($rawCompany && strtolower(trim((string) $rawCompany)) === 'not provided') {
-            $rawCompany = null;
-        }
 
         if ($rawPhone && strtolower(trim((string) $rawPhone)) === 'not provided') {
             $rawPhone = null;
@@ -77,9 +70,6 @@ class ContactSubmissionRequest extends FormRequest
         }
         if ($rawName !== null) {
             $merge['name'] = trim((string) $rawName);
-        }
-        if ($rawCompany !== null) {
-            $merge['company'] = trim((string) $rawCompany);
         }
         if ($rawInterest !== null) {
             $merge['interest'] = trim((string) $rawInterest);
@@ -106,9 +96,8 @@ class ContactSubmissionRequest extends FormRequest
             'lastName' => ['nullable', 'string', 'max:120'],
             'name' => ['nullable', 'string', 'max:255', 'required_without:firstName'],
             'email' => ['required', 'string', 'email:rfc', 'max:255'],
-            'company' => ['nullable', 'string', 'max:255'],
             'interest' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'regex:/^[+\d]?[\d\s-]{7,15}$/', 'max:50'],
+            'phone' => ['nullable', 'string', 'max:50', 'regex:/^(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/'],
             'message' => ['required', 'string', 'max:5000'],
         ];
     }
@@ -121,8 +110,9 @@ class ContactSubmissionRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Please enter your work email address.',
+            'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
+            'phone.regex' => 'Please enter a valid US phone number (e.g. +1 555 123 4567).',
             'interest.required' => 'Please select what we can help you with.',
             'firstName.required_without' => 'Please enter your first name.',
             'name.required_without' => 'Please enter your name.',

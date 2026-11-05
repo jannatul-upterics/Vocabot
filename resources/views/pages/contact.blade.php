@@ -134,16 +134,16 @@
 
                     <!-- Email -->
                     <div class="form-group">
-                        <label for="email">Work Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="you@company.com" autocomplete="email" required>
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Your Email" autocomplete="email" required>
                         <div class="error-message" id="error-email">@error('email') {{ $message }} @enderror</div>
                     </div>
 
-                    <!-- Company -->
+                    <!-- Contact Number -->
                     <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" value="{{ old('company') }}" placeholder="Your company name" autocomplete="organization">
-                        <div class="error-message" id="error-company">@error('company') {{ $message }} @enderror</div>
+                        <label for="phone">Contact Number</label>
+                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="+1 (555) 123-4567" autocomplete="tel">
+                        <div class="error-message" id="error-phone">@error('phone') {{ $message }} @enderror</div>
                     </div>
 
                     <!-- Interest -->

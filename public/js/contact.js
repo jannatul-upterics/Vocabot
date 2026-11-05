@@ -662,9 +662,14 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
       }
     }
 
-    // Company (optional)
-    const $companyInput = $("#company");
-    const company = $companyInput.length ? $.trim($companyInput.val()) : "";
+    // Contact Number (optional, US format)
+    const usPhoneRegex = /^(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
+    const $phoneInput = $("#phone");
+    const phone = $phoneInput.length ? $.trim($phoneInput.val()) : "";
+    if ($phoneInput.length && phone && !usPhoneRegex.test(phone)) {
+      showFieldError("phone", "Please enter a valid US phone number (e.g. +1 555 123 4567).");
+      isValid = false;
+    }
 
     // If client validation fails, display overall error and stop
     if (!isValid) {
@@ -690,7 +695,7 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
       lastName: lastName,
       name: name || (firstName ? (firstName + " " + lastName).trim() : ""),
       email: email,
-      company: company,
+      phone: phone,
       interest: interest || subject,
       subject: subject || interest,
       message: message,

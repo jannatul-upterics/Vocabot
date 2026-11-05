@@ -35,7 +35,6 @@ class ContactController extends Controller
         );
 
         $email = trim($validated['email']);
-        $company = ! empty($validated['company']) ? trim($validated['company']) : null;
         $subject = ! empty($validated['interest']) ? trim($validated['interest']) : null;
         $phone = ! empty($validated['phone']) ? trim($validated['phone']) : null;
         $message = ! empty($validated['message']) ? trim($validated['message']) : null;
@@ -56,7 +55,6 @@ class ContactController extends Controller
                     'name' => $fullName,
                     'email' => $email,
                     'phone' => $phone,
-                    'company' => $company,
                     'subject' => $subject,
                     'message' => $message,
                 ]);

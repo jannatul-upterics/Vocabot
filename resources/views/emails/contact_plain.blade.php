@@ -7,9 +7,6 @@ Email Address: {{ $customerEmail }}
 @if(!empty($customerPhone))
 Phone Number:  {{ $customerPhone }}
 @endif
-@if(!empty($company))
-Company:       {{ $company }}
-@endif
 @if(!empty($subjectText))
 Subject / Interest: {{ $subjectText }}
 @endif
