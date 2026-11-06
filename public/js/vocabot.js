@@ -547,7 +547,7 @@ function initContactForm() {
           minlength: "Name must be at least 2 characters.",
         },
         email: {
-          required: "Please enter your work email address.",
+          required: "Please enter your email address.",
           customEmail: "Please enter a valid email address.",
         },
         phone: {

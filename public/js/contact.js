@@ -626,7 +626,7 @@ const navLinks = document.querySelectorAll(".desktop-nav a"); const currentPage 
     const email = $emailInput.length ? $.trim($emailInput.val()) : "";
     if ($emailInput.length) {
       if (!email) {
-        showFieldError("email", "Please enter your work email address.");
+        showFieldError("email", "Please enter your email address.");
         isValid = false;
       } else if (!emailPattern.test(email)) {
         showFieldError("email", "Please enter a valid email address.");
