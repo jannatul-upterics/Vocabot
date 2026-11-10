@@ -2,8 +2,17 @@
 <footer class="footer">
   <div class="container footer-grid">
     <div class="footer-brand">
+      @php
+        $logoPath = $themeSettings['logo'] ?? 'images/logo2.webp';
+        $logoUrl = str_starts_with($logoPath, 'http') ? $logoPath : asset($logoPath);
+      @endphp
       <a class="brand logo" href="{{ url('/') }}">
-        <img src="{{ asset('images/logo2.webp') }}?v={{ filemtime(public_path('images/logo2.webp')) }}" alt="Vocabot AI Voice Receptionist Logo" width="36" height="36">
+        <img src="{{ $logoUrl }}"
+             alt="Vocabot AI Voice Receptionist Logo"
+             width="36"
+             height="36"
+             style="object-fit: contain; max-height: 36px; width: auto;"
+             onerror="this.onerror=null; this.src='{{ asset('images/logo2.webp') }}';">
         <span><b>Voca</b>bot</span>
       </a>
       <p>24/7 AI voice receptionist that answers customer calls, manages reservations, and turns conversations into completed workflows.</p>
